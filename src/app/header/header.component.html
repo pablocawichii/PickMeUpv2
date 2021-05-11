@@ -1,0 +1,35 @@
+
+
+<nav class="navbar navbar-default" style="margin-bottom: 0px;">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+	<div class="navbar-header">
+	  <button type="button" class="navbar-toggle" (click)="collapsed = !collapsed">
+		<span class="icon-bar" *ngFor="let iconBar of [1, 2, 3]"></span>
+	  </button>
+    <a class="navbar-brand" (click)="goBack()"><--</a>
+	  <a routerLink="/" class="navbar-brand">Pick Me Up</a>
+	</div>
+	<div class="navbar-collapse" [class.collapse]="collapsed" (window:resize)="collapsed = true">
+      <ul class="nav navbar-nav">
+<!-- 		<li routerLinkActive="active" *ngIf="isAuthenticated"><a routerLink="/pickups" >Pickups</a></li> -->
+
+		<li routerLinkActive="active"><a routerLink="/live-map" >Map</a></li>
+		<li routerLinkActive="active"><a routerLink="/drivers" >Drivers</a></li>
+		<li routerLinkActive="active" ><a routerLink="/pickups" >Pickups</a></li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+      	<li><a>{{ priv }}</a></li>
+      	<li>
+      		<a style="cursor: pointer;" *ngIf="isAuthenticated" (click)="onLogout()">Logout</a>
+      	</li>
+		<li routerLinkActive="active" *ngIf="!isAuthenticated"><a routerLink="/login" >Login</a></li>
+<!--         <li class="dropdown" appDropdown *ngIf="isAuthenticated">
+          <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" style="cursor: pointer;">Manage <span class="caret"></span></a>
+			<ul class="dropdown-menu">
+			</ul>
+        </li>  -->
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>

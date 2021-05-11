@@ -1,0 +1,11 @@
+
+    <h1 class="appTitle" style="margin-top: 10px; ">Live Map</h1>
+	<google-map width="100%"
+	            [center]="center"
+	            [zoom]="zoom"
+	            (mapClick)="addMarker($event)" #map>
+	  <map-marker [position]="userPosition" [options] ="markerOptions" label="U"></map-marker>
+	  <map-marker *ngFor="let markerPosition of markerPositions"
+	              [position]="markerPosition"
+	              [options]="markerOptions" (click)="mapMarkerClick($event)"></map-marker>
+	</google-map>

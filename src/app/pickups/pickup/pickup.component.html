@@ -1,0 +1,36 @@
+<h1>Customer Pickup</h1>
+
+<div  *ngIf="priv == 'Driver'">
+	<div *ngIf="pickup">
+		<button class="btn btn-success" *ngIf="pickup.status == 'unclaimed'" (click)='claim()'>Claim</button>
+		<button class="btn btn-danger" *ngIf="(pickup.driver == authenticationService.data.uid) && (pickup.status == 'claimed')" (click)='unclaim()'>Unclaim</button>		
+		<button class="btn btn-danger" *ngIf="(pickup.driver == authenticationService.data.uid) && (pickup.status == 'claimed')" (click)='retrieved()'>Retrieved</button>
+		<button class="btn btn-danger" *ngIf="(pickup.driver == authenticationService.data.uid) && (pickup.status == 'retrieved')" (click)='delivered()'>Delivered</button>
+	</div>
+</div>
+<div  *ngIf="priv != 'Driver'">
+	<div *ngIf="pickup">
+		<h3 style="text-transform:capitalize;">Status: {{ pickup.status }}</h3>
+	</div>
+</div>
+
+<div *ngIf="showMap">
+	<google-map width="100%"
+	            [center]="center"
+	            [zoom]="zoom"
+	             #map>
+	  <map-marker *ngFor="let markerPosition of markerPositions"
+	              [position]="markerPosition"
+	              [options]="markerOptions"></map-marker>
+	    <map-directions-renderer *ngIf="(directionsResults$ | async) as directionsResults"
+	               [directions]="directionsResults"></map-directions-renderer>
+
+	</google-map>
+</div>
+
+<div *ngIf="showRatingForm">
+	<h1>Rate me!</h1>
+	<input type="number" min="0" max="5" name="" [(ngModel)]="stars">
+	<input type="text" [(ngModel)]="rating">
+	<button (click)="submitRating()">Submit</button>
+</div>

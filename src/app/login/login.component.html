@@ -1,0 +1,24 @@
+<h1>Login</h1>
+<div class="home_page">
+
+<div class="" id="non-clientArea">
+	<hr>
+	<div *ngIf="!(authenticationService.userData | async)">
+	    <input class="textArea centerItem" type="text" [(ngModel)]="email" placeholder="Email">
+	    <input class="textArea centerItem" type="password" [(ngModel)]="password" placeholder="Password">
+
+	   	<hr>
+
+	    <div class="row" style="margin: 0 auto; width: 150px">
+	    	
+	    <button class="blueBtn ovalBtn btn" (click)="signUp()">Sign Up</button>
+	    <span>&nbsp;&nbsp;</span>
+	    <button class="blueBtn ovalBtn btn" (click)="signIn()">Login</button>
+
+      	<button (click)="loginGoogle()">Login with Google</button>
+	    </div>
+	    <hr>
+	</div>
+</div>
+
+<button (click)="signOut()" *ngIf="authenticationService.userData | async">Logout</button>

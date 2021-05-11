@@ -1,0 +1,12 @@
+    <h1 class="appTitle" style="margin-top: 10px; ">New Pickup</h1>
+    <button (click)="newPickup()">Confirm New Pickup</button>
+    <button (click)="showMap()">Add DropOff Location</button> <hr>
+    <div *ngIf="show">
+		<google-map width="100%"
+		            [center]="center"
+		            [zoom]="zoom"
+		            (mapClick)="addMarker($event)" >
+		  <map-marker [position]="dropOffPosition"
+		              [options]="markerOptions"></map-marker>
+		</google-map>
+    </div>

@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "pickmeup-307305": {
+      "hosting": {
+        "PickMeUpv2": [
+          "pickmeup-307305"
+        ]
+      }
+    }
+  }
+}

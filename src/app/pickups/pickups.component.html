@@ -1,0 +1,18 @@
+
+<div style=" width: 300px; margin: 0 auto;" class="" >
+<h1 style=" width: 130px; margin: 0 auto;">Pickups</h1>
+<button style="width: 100px; margin: 10px auto; display: block;" class="btn btn-primary" routerLink="/pickups/new"> New Pickup </button>
+
+<table *ngIf="auth.priv == 'Driver'" width="100%">
+	<tr><hr></tr>
+	<tr>
+		<th width="75%">Time since Request</th>
+		<th width="25%">More Info</th>
+	</tr>
+	<tr *ngFor="let pickup of pickups">
+		<td>{{ convertToString(currentDate.valueOf() - pickup.dateTimeSeconds) }}</td>
+		<td><button style="width: 35px; margin: 0 auto; display: block" class="btn btn-primary" routerLink="/pickups/{{ pickup.id }}"> X </button></td>
+	</tr>
+</table>
+
+<div>
