@@ -9,6 +9,8 @@ import { Pickup } from '../pickup.model';
 import { PickupsService } from '../pickups.service';
 
 import { AuthenticationService } from '../../shared/authentication.service'
+import { FlashService } from '../../shared/flash.service'
+
 
 import { Driver } from '../../drivers/driver.model'
 import { DriversService } from '../../drivers/drivers.service'
@@ -43,9 +45,10 @@ export class PickupComponent implements OnInit {
   constructor(public authenticationService: AuthenticationService,
               private driversService: DriversService,
               private mapDirectionsService: MapDirectionsService,
-  			  private pickupsService: PickupsService,
-  			  private route: ActivatedRoute,
-              private router: Router
+  			      private pickupsService: PickupsService,
+  			      private route: ActivatedRoute,
+              private router: Router,
+              private flashService: FlashService
               ) { 
   }
 
@@ -53,10 +56,6 @@ export class PickupComponent implements OnInit {
   priv;
 
   ngOnInit() {
-  	this.priv = this.authenticationService.priv
-	this.authenticationService.privChanged.subscribe(priv => {
-		this.priv = priv;
-	})
 
     this.route.params.subscribe(
       (params: Params) => {

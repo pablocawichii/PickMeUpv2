@@ -14,6 +14,6 @@ export class Pickup {
 	constructor(location, dateTime: Date){
 		this.location = location;
 		this.dateTime = dateTime;
-		this.status = "unclaimed"		
+		this.status = "unclaimed";
 	}
 }

@@ -5,6 +5,7 @@ import { map, tap, toArray } from 'rxjs/operators'
 import { Router } from '@angular/router'
 
 import { Pickup } from './pickup.model';
+import { FlashService } from '../shared/flash.service'
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +14,8 @@ export class PickupsService {
 	pickups;
 
 
-	constructor(private db: AngularFireDatabase, private router: Router) {
+	constructor(private db: AngularFireDatabase, private router: Router,
+              private flashService: FlashService) {
 		this.pickups = this.db.list('pickups').snapshotChanges().pipe(
 			map(pickups=>
 				pickups.map(p => {
@@ -45,9 +47,9 @@ export class PickupsService {
 		)
 	}
 
-	getUnclaimedPickups() //: Observable<any[]>
+	getDriverPickup(driverId: string)
 	{
-		return this.db.list('pickups').snapshotChanges().pipe(
+		return this.db.list('pickups', ref => ref.orderByChild("driver").equalTo(driverId)).snapshotChanges().pipe(
 			map(pickups=>
 				pickups.map(p => {
 					let k = { ...p.payload.val() as Pickup}
@@ -58,8 +60,25 @@ export class PickupsService {
 					)}
 				)
 			),
-  			map((pick) => pick.filter((p) => p.status == 'unclaimed')),
+  			map((pick) => pick.filter((p) => p.status == 'claimed'))
+		)
+	}
+
+	getUnclaimedPickups() //: Observable<any[]>
+	{
+		return this.db.list('pickups', ref => ref.orderByChild("status").equalTo("unclaimed")).snapshotChanges().pipe(
+			
+			map(pickups=>
+				pickups.map(p => {
+					let k = { ...p.payload.val() as Pickup}
+					let x : Pickup = { id: p.payload.key, ...k }
+					x.dateTimeSeconds = (new Date(x.dateTime).valueOf())
+					return (
+						x
+					)}
+				)
 			)
+		)
 	}
 
 	getPickup(id: string){
@@ -81,6 +100,7 @@ export class PickupsService {
 
 		this.db.list('pickups/').push(pu)
 		.then((res) => {
+			this.flashService.setMessage("New Pickup Added");
 			this.router.navigate (['/pickups/'+res.key])
 		})
 

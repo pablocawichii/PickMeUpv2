@@ -12,6 +12,7 @@ import { DriversService } from './drivers/drivers.service'
 export class AppComponent {
   title = 'PickMeUp';
   subscription: Subscription;
+  priv;
 
   constructor(private authenticationService: AuthenticationService, private driversService: DriversService){
   	authenticationService.userData.subscribe( (user) => {
@@ -23,8 +24,10 @@ export class AppComponent {
   		this.subscription = driversService.getDriver((!!user ? user.uid : '0')).subscribe((driver) => {
   			let test = (Object.keys(driver).length === 0 && driver.constructor === Object)
 	  		if(test) {
+          this.priv = "Anon"
 		  		authenticationService.setPriv("Anon");
 	  		} else {
+          this.priv = "Driver"
 	  			authenticationService.setPriv("Driver");
 	  		}
   		})

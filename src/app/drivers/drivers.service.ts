@@ -45,6 +45,10 @@ export class DriversService {
 			tap((drivers) => console.log(drivers))
 		)
 	}
+	
+	// getPickupId(id: string) {
+	// 	return this.db.object('drivers/'+id+'/currentPickup')
+	// }
 
 	createDriver(id: string, driver: Driver) {
 		this.db.object('drivers/'+id).set(driver)
@@ -58,6 +62,8 @@ export class DriversService {
 		this.db.object('drivers/'+id+'/lkl').update(changes)
 	}
 
-
+	updateDriverPickup(id: string, pickupId: string) {
+		this.db.object('drivers/'+id+'/currentPickup').update(pickupId)
+	}
 
 }

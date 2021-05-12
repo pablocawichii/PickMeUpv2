@@ -4,6 +4,8 @@ import { Subscription, Observable } from 'rxjs'
 import { Pickup } from './pickup.model';
 import { PickupsService } from './pickups.service';
 import { AuthenticationService } from '../shared/authentication.service'
+import { Driver } from '../drivers/driver.model'
+import { DriversService } from '../drivers/drivers.service'
 
 @Component({
   selector: 'app-pickups',
@@ -14,13 +16,29 @@ export class PickupsComponent implements OnInit {
 	pickups: Pickup[];
 	listOfPickups;
 	currentDate: Date;
+  showList = false;
+  priv;
+  driverPickups: Pickup[];
+  showDriverPickups = false;
 
-  constructor(private pickupsService: PickupsService, public auth: AuthenticationService) { }
+  constructor(private pickupsService: PickupsService, public auth: AuthenticationService, public driversService: DriversService) { }
 
   ngOnInit() {
-  	this.pickupsService.getUnclaimedPickups().subscribe(pickups => {
-  		this.pickups = pickups;
-  	});
+    this.priv = this.auth.priv;
+    if(this.priv == "Driver") {
+      this.showList = true;  
+      this.pickupsService.getDriverPickup(this.auth.data.uid).subscribe(pickups => {
+        this.driverPickups = pickups;
+        if(this.driverPickups.length != 0) {
+          this.showDriverPickups = true;
+        } else {
+          this.showDriverPickups = false;
+        }
+      });
+    	this.pickupsService.getUnclaimedPickups().subscribe(pickups => {
+    		this.pickups = pickups;
+    	});
+    }
 
   	this.currentDate = new Date();
   	setInterval(() => {

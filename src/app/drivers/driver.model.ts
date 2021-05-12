@@ -7,6 +7,7 @@ export class Driver {
 	public status: string;
 	public cars: Car[];
 	public currentCar: number;
+	public currentPickup?: string;
 
 	constructor(email: string, name: string, status: string, id: string) {
 		this.id = id;

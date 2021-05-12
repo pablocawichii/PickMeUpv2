@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 import { Pickup } from '../pickup.model';
 import { PickupsService } from '../pickups.service';
+import { FlashService } from '../../shared/flash.service'
 @Component({
   selector: 'app-pickup-new',
   templateUrl: './pickup-new.component.html',
@@ -20,7 +21,8 @@ export class PickupNewComponent implements OnInit {
 	dropOffPosition : {lat: number, lng: number};
 
 
-	constructor(private pickupsService: PickupsService) { }
+	constructor(private pickupsService: PickupsService,
+              	private flashService: FlashService) { }
 
 	ngOnInit(): void {
 	}
