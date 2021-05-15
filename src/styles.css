@@ -1,3 +1,6 @@
+/*Google fonts*/
+@import url(https://fonts.googleapis.com/css2?family=Roboto:wght@700&display=swap);
+
 /* You can add global styles to this file, and also import other style files */
 body{
     background-image: linear-gradient(45deg, #ffccc6e1, white, #c4f8ffd5);
@@ -6,15 +9,47 @@ body{
     overflow: hidden;
     margin: 0;
     padding: 0;
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Roboto', sans-serif;
 }
 
+/*#clientArea{
+    display: none;
+}*/
 
+#admin_home{
+    display: none;
+}
+
+#admin_add{
+    display: none;
+}
+
+#AdminDriverDetails{
+    overflow: sc;
+}
+
+/*default font sizes*/
+p{
+    font-size: 1.65rem;
+}
+
+hr{
+    margin: 0;
+    padding: 0;
+    display: none;
+}
 
 #mainContent{
     text-align: center;
 }
 
+.smallDevice{
+    display: none;
+    background: rgb(255, 230, 230);
+    width: 95%;
+    border-radius: 10px;
+    border: 1px solid rgb(255, 140, 140);
+}
 
 /* ------------------LOGIN------------------ */
 .loginForm{
@@ -22,7 +57,7 @@ body{
     top: 25%;
     left: 10%;
     width: 600px;
-    height: 400px;
+    height: 350px;
     border-radius: 20px 0 20px 0;
     overflow: hidden;
     background: white;
@@ -52,14 +87,13 @@ body{
 .innerLogin{
     position: relative;
     top: 0;
-    left: 0;
+    left: 4%;
     width: 400px;
     margin-top: 10%;
-    height: 350px;
+    height: 300px;
     display: inline-block;
     transition: 0.5s;
 }
-
 
 /* ------------------BUTTONS------------------ */
 .innerBlock{
@@ -75,16 +109,18 @@ body{
     align-items: center;
 }
 
-.btn{
+.bttn{
     outline: none;
     border: 2px solid black;
     border-radius: 10px;
-    font-size: 1.1rem;
+    font-size: 2rem;
+    font-weight: 500;
 }
 
 .ovalBtn{
     padding: 5px 25px;
     border-radius: 20px;
+    border: 1px solid black;
 }
 
 .blueBtn{
@@ -93,11 +129,12 @@ body{
 }
 
 .homeBtn{
+    width: 225px;
     padding: 5px;
-    font-size: 2rem;
     background: white;
     color: black;
     transition: 0.4s;
+    margin-bottom: 20px;
 }
 
 .homeBtn:hover{
@@ -114,24 +151,34 @@ body{
     transform: translateX(-50%);
     background: white;
     color: black;
-    font-size: 1.5rem;
+    font-size: 1.15em;
+    width: 150px;
+    padding: 5px;
 }
 
 .lowerBtn{
-    font-size: 1.4rem;
+    margin: 5px 10px;
+    padding: 5px;
+    width: 125px;
+    font-size: 2rem;
     display: inline;
-    width: 110px;
     color: black;
     background: white;
 }
 
 
 /* ------------------MICS------------------ */
+.googleMaps{
+    width: 100%;
+    height: 65%;
+}
+
 /*centers any element horizontally*/
 .centerItem{
     position: relative;
     left: 50%;
     transform: translateX(-50%);
+    text-align: center;
 }
 
 /*places the elements at the bottom of the div*/
@@ -191,16 +238,97 @@ body{
     border: 3px solid red;
 }
 
+
+/* ------------------TABLE------------------ */
+/*div*/
+.tableArea{
+    background: white;
+    border-radius: 10px;
+    padding: 10px 0;
+    width: 92%;
+    overflow-y: scroll;
+}
+
+/*table container*/
+.tableContent{
+    width: 100%;
+}
+
+.tableContent tr{
+    border-bottom: 1px solid rgb(98, 98, 255);
+}
+
+/*table column description eg. index, name, ...*/
+.tableHeader{
+    font-size: 1.25em;
+}
+
+.tableHeader span{
+    color: rgb(139, 139, 255);
+}
+
+/*height between rows*/
+.tableContent th{
+    height: 50px;
+    padding: 0 20px;
+}
+
+/*make the first 3 columns wider*/
+.tableContent th:nth-child(1), .tableContent th:nth-child(2), .tableContent th:nth-child(3){
+    width: 250px;
+}
+
+.tableContent th:nth-child(4), .tableContent th:nth-child(5){
+    width: 150px;
+}
+
+/* ------DRIVER DETAILS----- */
+.detailsTable{
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 70%;
+    border-radius: 15px;
+    border: 1px solid rgb(40, 40, 255)
+}
+
+.detailsTable p{
+    padding-top: 0;
+    margin-top: 0;
+    height: 50px;
+    border-radius: 14px 14px 0 0;
+    background: rgb(120, 120, 255);
+    color: white;
+    text-align: center;
+}
+
+.detailsTable label{
+    font-size: 1.25em;
+    margin-left: 4%;
+}
+
+.detailsTable .textArea{
+    width: 95%;
+}
+
+.vehicleRow{
+    width: 100%;
+    border: 1px solid lightgray;
+    margin-bottom: 30px;
+}
+
 /* ------------------PAGE TABS------------------ */
 /*Pick Me Up title*/
 .appTitle{
     margin: 30px 0 20px 0;
     text-align: center;
-    font-size: 2.75rem;
+    font-size: 4rem;
+    margin-bottom: 20px;
+    font-weight: 600;
 }
 
 /*title of the page - add driver, view map, etc...*/
-.subtitle{
+.subTitle{
     margin: 5px 0;
     font-size: 1.6em;
 }
@@ -210,7 +338,6 @@ body{
     z-index: 10;
     display: block;
     background:rgb(233, 233, 233);
-    border: 2px solid black;
 }
 
 .newPage{
@@ -244,6 +371,14 @@ body{
 @keyframes moveLeft{
     from{transform: translateX(0);}
     to{transform: translateX(-110%);}
+}
+
+
+/* - - - - - - 830PX WIDE SCREENS - - - - - - */
+@media screen and (max-width: 830px) {
+    .smallDevice{
+        display: block;
+    }
 }
 
 /* - - - - - - 450PX WIDE SCREENS - - - - - - */
