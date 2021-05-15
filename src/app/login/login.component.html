@@ -1,24 +1,51 @@
-<h1>Login</h1>
-<div class="home_page">
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
-<div class="" id="non-clientArea">
+
+<h1 class="centerItem">Welcome To</h1>
+<h1 class="centerItem">Pick Me Up</h1>
+<!--<div class="home_page">-->
+
+<div *ngIf="!(authenticationService.userData | async)">
+	<!--AREA ONLY FOR ICON-->
+	<div class="loginForm centerItem" id="non-clientArea">
+		<hr>
+		<div class="logoArea">
+			<img src="./PMU_logo.png" alt="PICK-ME-UP-LOGO" width="200" height="152">
+			<p>Connecting taxi drivers and clients!</p>
+		</div>
+	<!--LOGIN AREA-->
+	<div class="row loginArea">
+		<!--AREA TO LOGIN WITH GOOGLE-->
+		<div class="innerLogin" id="clientArea">
+			<p>To use our services<br>
+				<span class="material-icons">&#xe51e;</span> Enable GPS on your device<br>
+				Login with Google<br><br></p>
+			<button class="blueBtn ovalBtn bttn" (click)="loginGoogle()">Continue &#10140;</button>
+			<div class="lowerButtonsArea">
+				<p>Admin or Driver?</p>
+				<button class="bttn ovalBtn" onclick="hideClientArea()">Change &#10097;&#10097;</button>
+			</div>
+		</div>
+		<!--AREA TO LOGIN AS ADMIN OR DRIVER-->
+		<div class="innerLogin" id="non-clientArea">
+			<input class="textArea centerItem" type="text" [(ngModel)]="email" placeholder="Email">
+			<br>
+			<input class="textArea centerItem" type="password" [(ngModel)]="password" placeholder="Password">
+			<br>
+			<hr>
+			<button class="blueBtn ovalBtn bttn" (click)="signUp()">Sign Up</button>
+			<span>&nbsp;&nbsp;</span>
+			<button class="blueBtn ovalBtn bttn" (click)="signIn()">Login</button>
+			<div class="lowerButtonsArea">
+				<p>Just a Client?</p>
+				<button class="ovalBtn bttn" onclick="hideNonClientArea()">&#10096;&#10096;Back</button>
+			</div>
+		</div>
+	</div>
 	<hr>
-	<div *ngIf="!(authenticationService.userData | async)">
-	    <input class="textArea centerItem" type="text" [(ngModel)]="email" placeholder="Email">
-	    <input class="textArea centerItem" type="password" [(ngModel)]="password" placeholder="Password">
-
-	   	<hr>
-
-	    <div class="row" style="margin: 0 auto; width: 150px">
-	    	
-	    <button class="blueBtn ovalBtn btn" (click)="signUp()">Sign Up</button>
-	    <span>&nbsp;&nbsp;</span>
-	    <button class="blueBtn ovalBtn btn" (click)="signIn()">Login</button>
-
-      	<button (click)="loginGoogle()">Login with Google</button>
-	    </div>
-	    <hr>
 	</div>
 </div>
-
 <button (click)="signOut()" *ngIf="authenticationService.userData | async">Logout</button>
