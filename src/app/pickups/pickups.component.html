@@ -1,7 +1,13 @@
 
+
 <div style=" width: 300px; margin: 0 auto;" class="" >
-<h1 style=" width: 130px; margin: 0 auto;">Pickups</h1>
-<button style="width: 100px; margin: 10px auto; display: block;" class="btn btn-primary" routerLink="/pickups/new"> New Pickup </button>
+<h1 class="appTitle">Pick Me Up</h1>
+<br>
+<br>
+<button class="bttn centerItem homeBtn" routerLink="/pickups/new"> Request Pickup </button>
+<button class="bttn centerItem homeBtn" routerLink="/live-map"> View Map </button>
+<button class="bttn centerItem homeBtn"> View Requests </button>
+<button class="bttn logoutBtn" >Log Out</button>
 
 <table *ngIf="showList" width="100%">
 	<tr><hr></tr>
@@ -24,4 +30,4 @@
 	
 </table>
 
-<div>
+</div>
