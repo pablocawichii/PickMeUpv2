@@ -1,5 +1,5 @@
-
-    <h1 class="appTitle" style="margin-top: 10px; ">Live Map</h1>
+<h1 class="appTitle" style="margin-top: 10px; ">Live Map</h1>
+<div class="googleMaps">
 	<google-map width="100%"
 	            [center]="center"
 	            [zoom]="zoom"
@@ -9,3 +9,4 @@
 	              [position]="markerPosition"
 	              [options]="markerOptions" (click)="mapMarkerClick($event)"></map-marker>
 	</google-map>
+</div>
