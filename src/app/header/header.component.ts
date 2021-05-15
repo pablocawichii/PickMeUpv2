@@ -15,7 +15,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
 	collapsed = true;
 	isAuthenticated ;
 	user;
-	priv;
+	priv = "Anon";
 	message: string = '';
 
 	constructor(private router: Router,public authenticationService: AuthenticationService, private location: Location, private flash: FlashService ) {}
@@ -26,6 +26,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
 			this.isAuthenticated = !!user;
 		});
 		this.authenticationService.privChanged.subscribe(priv => {
+			console.log(this.priv)
 			this.priv = priv;
 		})
 		this.flash.messageChanged.subscribe((msg: string) => {

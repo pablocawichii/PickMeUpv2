@@ -78,7 +78,7 @@ export class DriverEditComponent implements OnInit {
     const status = this.driverForm.value['status'];
     const cars = this.driverForm.value['cars'];
 
-    const newDriver = new Driver(email, name, status, this.id)
+    const newDriver = new Driver(email, name, status, this.id, this.driver.priv)
     newDriver.cars = cars;
     newDriver.currentCar = currentCar;
     newDriver.lkl = this.driver.lkl;

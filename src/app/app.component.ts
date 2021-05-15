@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Subscription } from 'rxjs'
 
 import { AuthenticationService } from './shared/authentication.service'
+import { Driver } from './drivers/driver.model'
 import { DriversService } from './drivers/drivers.service'
 
 @Component({
@@ -21,14 +22,15 @@ export class AppComponent {
   			this.subscription.unsubscribe()
   		};
 
-  		this.subscription = driversService.getDriver((!!user ? user.uid : '0')).subscribe((driver) => {
+
+  		this.subscription = driversService.getDriver((!!user ? user.uid : '0')).subscribe((driver: Driver) => {
   			let test = (Object.keys(driver).length === 0 && driver.constructor === Object)
 	  		if(test) {
           this.priv = "Anon"
 		  		authenticationService.setPriv("Anon");
 	  		} else {
-          this.priv = "Driver"
-	  			authenticationService.setPriv("Driver");
+            this.priv = driver.priv
+  	  			authenticationService.setPriv(driver.priv);
 	  		}
   		})
 		

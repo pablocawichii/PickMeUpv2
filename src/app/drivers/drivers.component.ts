@@ -26,7 +26,7 @@ export class DriversComponent implements OnInit {
 
   addNewDriver(form: NgForm){
       const value = form.value;
-      const newDriver = new Driver(value.email, value.name, value.status, value.uid);
+      const newDriver = new Driver(value.email, value.name, value.status, value.uid, "Driver");
 
       this.driversService.createDriver(value.uid, newDriver)
 

@@ -8,8 +8,9 @@ export class Driver {
 	public cars: Car[];
 	public currentCar: number;
 	public currentPickup?: string;
+	public priv?: string;
 
-	constructor(email: string, name: string, status: string, id: string) {
+	constructor(email: string, name: string, status: string, id: string, priv: string) {
 		this.id = id;
 		this.email = email;
 		this.name = name;
@@ -17,5 +18,6 @@ export class Driver {
 		this.status = status;
 		this.cars = []
 		this.currentCar = -1;
+		this.priv = priv;
 	}
 }

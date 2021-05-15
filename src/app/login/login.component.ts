@@ -10,6 +10,7 @@ import { Router } from '@angular/router'
 export class LoginComponent implements OnInit {
   email: string;
   password: string;
+  cust = true;
 
   constructor(public authenticationService: AuthenticationService, private router: Router) {}
 
@@ -48,6 +49,10 @@ export class LoginComponent implements OnInit {
 
   loginGoogle() {  	
     this.authenticationService.SignInGoogle();
+  }
+
+  switcha() {
+    this.cust = !this.cust;
   }
 }
 

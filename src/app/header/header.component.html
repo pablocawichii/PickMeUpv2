@@ -15,7 +15,7 @@
 <!-- 		<li routerLinkActive="active" *ngIf="isAuthenticated"><a routerLink="/pickups" >Pickups</a></li> -->
 
 		<li routerLinkActive="active"><a routerLink="/live-map" >Map</a></li>
-		<li routerLinkActive="active"><a routerLink="/drivers" >Drivers</a></li>
+		<li routerLinkActive="active" *ngIf="priv == 'Admin'"><a routerLink="/drivers" >Drivers</a></li>
 		<li routerLinkActive="active" ><a routerLink="/pickups" >Pickups</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
