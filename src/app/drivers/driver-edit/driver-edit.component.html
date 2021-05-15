@@ -26,55 +26,65 @@
 						<input type="text" name="email" class="form-control" formControlName="email">
 					</div>
 				</div>
-			</div>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
-			<div class="row">
-				<div class="col-xs-12">
-					<div class="form-group">
-						<label for="status">Status</label>
-						<input type="text" name="status" class="form-control" formControlName="status">
+<div id="AdminDriverDetails">
+	<div class=""  *ngIf="driver">
+		<div class="">
+			<form [formGroup]="driverForm" (ngSubmit)="onSubmit()" >
+				<br><br>
+				<div class="detailsTable">
+					<!-- Driver's Details - edit area -->
+					<p class="subTitle"><span class="material-icons"> &#xe150;</span> Account: {{ driver ? driver.name : '' }}</p>
+					<br>
+					<label class="" for="name">Name</label>
+					<input type="text" name="name" class="textArea centerItem" formControlName="name">
+					<br>
+					<label class="" for="email">Email</label>
+					<input type="text" name="email" class="textArea centerItem" formControlName="email">
+					<br>
+					<label class="" for="status">Status</label>
+					<input type="text" name="status" class="textArea centerItem" formControlName="status">
+	
+					<div class="centerItem">
+						<button [disabled]="!driverForm.valid" type="submit" class="bttn lowerBtn btn-success">Save</button>				
+						<button type="button" class="bttn lowerBtn btn-danger" (click)="onCancel()">Cancel</button>
 					</div>
 				</div>
-			</div>
-
-			<div class="row">
-				<div class="col-xs-12" formArrayName="cars">
+				<br><br>
+				<div class="detailsTable">
+					<!-- Driver's Vehicle - edit area -->
+					<p class="subTitle">Driver's Vehicles <span class="material-icons">&#xe559;</span></p>
+					<br>
+					<div class="vehicleRow" formArrayName="cars">
+						<!--Display all Vehicles-->
 						<div  [ngClass]="{highlight: formCurrentCar == i, row: true}" *ngFor="let carControl of getDriversCtrl(); let i = index" [formGroupName]="i" style="margin-top: 10px;">
-
-							<label class="col-xs-4" for="carModel">Model</label>
-							<div class="col-xs-8">
-								<input type="text" class="form-control" name="carModel" formControlName="model">
-							</div>
-							<label class="col-xs-4" for="carBrand">Brand</label>
-							<div class="col-xs-8">
-								<input type="text" class="form-control" name="carBrand" formControlName="brand">
-							</div>
-							<label class="col-xs-4" for="carColor">Color</label>
-							<div class="col-xs-8">
-								<input type="text" class="form-control" name="carColor" formControlName="color">
-							</div>
-							<label class="col-xs-4" for="carYear">Year</label>
-							<div class="col-xs-8">
-								<input type="number" class="form-control" name="carYear" formControlName="year">
-							</div>							
-							<div class="col-xs-4">
-								<button type="button" class="btn btn-danger" (click)="onDeleteCar(i)" >Delete Car</button>
-							</div>							
-							<div class="col-xs-4">
-								<button type="button" class="btn btn-primary" (click)="makeCurrentCar(i)" >Primary Car</button>
+	
+							<label class="" for="carModel">Model</label>
+							<input type="text" class="textArea centerItem" name="carModel" formControlName="model">
+								
+							<label class="" for="carBrand">Brand</label>
+							<input type="text" class="textArea centerItem" name="carBrand" formControlName="brand">
+	
+							<label class="" for="carColor">Color</label>
+							<input type="text" class="textArea centerItem" name="carColor" formControlName="color">
+	
+							<label class="" for="carYear">Year</label>
+							<input type="number" class="textArea centerItem" name="carYear" formControlName="year">
+	
+							<div class="centerItem">
+								<button type="button" class="bttn lowerBtn btn-danger" (click)="onDeleteCar(i)" >Delete Car</button>
+								<button type="button" class="bttn lowerBtn btn-primary" (click)="makeCurrentCar(i)" >Primary Car</button>
 							</div>
 							<hr>
+							<br><br><br><br>
 						</div>
+						<!--Add New Vehicle-->
+						<button class="bttn centerItem lowerBtn btn-success" type="button" (click)="onAddCar()" ><span class="material-icons">&#xe148;</span>Add Car</button>
 						<hr>
-						<div class="row">
-							<div class="col-xs-12">
-								<button class="btn btn-success" type="button" (click)="onAddCar()" >Add Car</button>
-							</div>
-						</div>
-
+					</div>
 				</div>
-			</div>
-
-		</form>
+			</form>
+		</div>
 	</div>
 </div>
