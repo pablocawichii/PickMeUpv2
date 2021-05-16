@@ -3,6 +3,8 @@ import { Component, OnInit } from '@angular/core';
 import { Pickup } from '../pickup.model';
 import { PickupsService } from '../pickups.service';
 import { FlashService } from '../../shared/flash.service'
+import { AuthenticationService } from '../../shared/authentication.service'
+
 @Component({
   selector: 'app-pickup-new',
   templateUrl: './pickup-new.component.html',
@@ -22,7 +24,7 @@ export class PickupNewComponent implements OnInit {
 
 
 	constructor(private pickupsService: PickupsService,
-              	private flashService: FlashService) { }
+              	private flashService: FlashService, private auth: AuthenticationService) { }
 
 	ngOnInit(): void {
 	}
@@ -45,7 +47,7 @@ export class PickupNewComponent implements OnInit {
 	if (navigator.geolocation) {
 	  	navigator.geolocation.getCurrentPosition(position => {
 	      	let nPickup = new Pickup({lat: position.coords.latitude, lng: position.coords.longitude}, new Date() );
-
+	      	nPickup.cust = this.auth.data.uid
 	      	if(!!this.dropOffPosition) {
 	      		nPickup.dropOffLocation = this.dropOffPosition;
 	      	}

@@ -1,7 +1,13 @@
  
-	<p class="centerItem subTitle">Select your destination</p>
-	<div class="googleMaps">
-		<div *ngIf="show">
+	<div *ngIf="!show">
+		<p class="centerItem subTitle">Open Map to add destination</p>
+		<p class="centerItem subTitle">Or</p>
+		<p class="centerItem subTitle">Click Confirm to </p>
+		<p class="centerItem subTitle">describe destination on taxi arrival</p>
+	</div>
+	<div *ngIf="show">
+		<p class="centerItem subTitle">Select your destination</p>
+		<div class="googleMaps">
 			<google-map width="100%" height="400px"
 						[center]="center"
 						[zoom]="zoom"
@@ -14,5 +20,5 @@
 	
 	<div class="lowerButtonsArea centerItem">
 		<button class="bttn lowerBtn" (click)="newPickup()">Confirm</button>
-		<button class="bttn lowerBtn" (click)="showMap()">Open Map</button> <hr>
+		<button class="bttn lowerBtn" (click)="showMap()">{{ show ? "Close" : "Open" }} Map</button> <hr>
 	</div>
