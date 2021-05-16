@@ -126,6 +126,9 @@ export class PickupsService {
 	delivered(id: string) {
 		this.db.object('pickups/'+id).update({status: 'delivered'})
 	}
+	cancel(id: string) {
+		this.db.object('pickups/'+id).update({status: 'canceled'})
+	}
 
 	cancelPickup(id: string) {
 

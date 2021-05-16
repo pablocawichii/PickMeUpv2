@@ -65,51 +65,51 @@ export class PickupComponent implements OnInit {
 	    .subscribe((p: Pickup)=> {
 	    	this.pickup = p;
   			this.priv = this.authenticationService.priv
-	    	console.log(p)
+	    	console.log(p)        
 	    	if(this.pickup.status == 'delivered') {
 	    		if(this.priv == "Driver") {
     				this.router.navigate(['/'])
 	    		}
 	    		this.removeMap()
-            	if(this.pickup.stars == null) {
-            		console.log("TESt")
-	                this.showForm()
-            	}
-            }
-            else if(this.pickup.status == 'retrieved') {
-            	if(!!this.pickup.dropOffLocation) {
-	                if(this.driverSubscription !== null) {
-	                	this.driverSubscription.unsubscribe()	
-	                }
-	                this.driverSubscription = this.driversService.getDriver(this.pickup.driver || this.authenticationService.data.uid)
-	                	.subscribe((driver: Driver) => {
+          if(this.pickup.stars == null) {
+        		console.log("TESt")
+            this.showForm()
+        	}
+        }
+        else if(this.pickup.status == 'retrieved') {
+        	if(!!this.pickup.dropOffLocation) {
+              if(this.driverSubscription !== null) {
+              	this.driverSubscription.unsubscribe()	
+              }
+              this.driverSubscription = this.driversService.getDriver(this.pickup.driver || this.authenticationService.data.uid)
+              	.subscribe((driver: Driver) => {
 
-	              			this.markerPositions[0] = this.pickup.dropOffLocation;
-	                		this.markerPositions[1] = driver.lkl;
-	                		this.getDirections();
-	                	})
-            	} else {
-            		this.removeMap();
-            	}
-            }
-            else if(this.priv == 'Driver' || this.pickup.status == 'claimed') {
-                this.markerPositions[0] = this.pickup.location;
+            			this.markerPositions[0] = this.pickup.dropOffLocation;
+              		this.markerPositions[1] = driver.lkl;
+              		this.getDirections();
+              	})
+        	} else {
+        		this.removeMap();
+        	}
+        }
+        else if(this.priv == 'Driver' || this.priv == 'Admin'  || this.pickup.status == 'claimed') {
+            this.markerPositions[0] = this.pickup.location;
 
-                if(this.driverSubscription !== null) {
-                	this.driverSubscription.unsubscribe()	
-                }
-                this.driverSubscription = this.driversService.getDriver(this.pickup.driver || this.authenticationService.data.uid)
-                	.subscribe((driver: Driver) => {
-                		console.log(driver)
-                		this.markerPositions[1] = driver.lkl;
-                		this.getDirections();
-                	})
-
-            } else {
-              this.markerPositions[0] = this.pickup.location;
-              this.markerPositions[1] = {lat: 0, lng: 0}
-              this.directionsResults$ = null 
+            if(this.driverSubscription !== null) {
+            	this.driverSubscription.unsubscribe()	
             }
+            this.driverSubscription = this.driversService.getDriver(this.pickup.driver || this.authenticationService.data.uid)
+            	.subscribe((driver: Driver) => {
+            		console.log(driver)
+            		this.markerPositions[1] = driver.lkl;
+            		this.getDirections();
+            	})
+
+        } else {
+          this.markerPositions[0] = this.pickup.location;
+          this.markerPositions[1] = {lat: 0, lng: 0}
+          this.directionsResults$ = null 
+        }
           
         })
 	
@@ -140,6 +140,10 @@ export class PickupComponent implements OnInit {
   delivered() {
     this.pickupsService.delivered(this.id)
     this.router.navigate(['/'])
+  }
+  cancel() {
+  this.pickupsService.cancel(this.id)
+    this.router.navigate(['/'])  
   }
 
   removeMap() {

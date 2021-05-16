@@ -1,16 +1,18 @@
 <h1>Customer Pickup</h1>
 
-<div  *ngIf="priv == 'Driver'">
+<div  *ngIf="priv == 'Driver' || priv == 'Admin'">
 	<div *ngIf="pickup">
+		<h3 class=" btn-danger" *ngIf="pickup.status == 'canceled'">Canceled</h3>
 		<button class="btn btn-success" *ngIf="pickup.status == 'unclaimed'" (click)='claim()'>Claim</button>
 		<button class="btn btn-danger" *ngIf="(pickup.driver == authenticationService.data.uid) && (pickup.status == 'claimed')" (click)='unclaim()'>Unclaim</button>		
 		<button class="btn btn-danger" *ngIf="(pickup.driver == authenticationService.data.uid) && (pickup.status == 'claimed')" (click)='retrieved()'>Retrieved</button>
 		<button class="btn btn-danger" *ngIf="(pickup.driver == authenticationService.data.uid) && (pickup.status == 'retrieved')" (click)='delivered()'>Delivered</button>
 	</div>
 </div>
-<div  *ngIf="priv != 'Driver'">
+<div  *ngIf="priv == 'Anon'">
 	<div *ngIf="pickup">
 		<h3 style="text-transform:capitalize;">Status: {{ pickup.status }}</h3>
+		<button class="btn btn-danger" *ngIf="pickup.status == 'unclaimed'" (click)='cancel()'>Cancel</button>
 	</div>
 </div>
 
