@@ -18,6 +18,7 @@ export class PickupsComponent implements OnInit {
 	listOfPickups;
 	currentDate: Date;
   showList = false;
+  showRequestButton = false;
   priv;
   driverPickups: Pickup[];
   showDriverPickups = false;
@@ -26,8 +27,8 @@ export class PickupsComponent implements OnInit {
 
   ngOnInit() {
     this.priv = this.auth.priv;
-    if(this.priv == "Driver") {
-      this.showList = true;  
+    if(this.priv == "Driver" || this.priv == "Admin") {
+      this.showRequestButton = true;  
       this.pickupsService.getDriverPickup(this.auth.data.uid).subscribe(pickups => {
         this.driverPickups = pickups;
         if(this.driverPickups.length != 0) {
@@ -43,7 +44,7 @@ export class PickupsComponent implements OnInit {
         this.router.navigate(['./live-map'])
 
     }
-    
+
   	this.currentDate = new Date();
   	setInterval(() => {
   		this.currentDate = new Date();
@@ -70,6 +71,10 @@ export class PickupsComponent implements OnInit {
     } else {
 		alert("Cannot retrieve location. Please allow location.")
     }
+  }
+
+  switchView() {
+      this.showList = !this.showList;  
   }
 
 }
