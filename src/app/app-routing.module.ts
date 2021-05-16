@@ -12,7 +12,7 @@ import { PickupNewComponent } from './pickups/pickup-new/pickup-new.component';
 
 
 const appRoutes: Routes = [
-  { path: '',  redirectTo: '/login', pathMatch: 'full'},
+  { path: '',  redirectTo: '/live-map', pathMatch: 'full'},
   { path: 'login', component: LoginComponent},
   { path: 'live-map', component: LiveMapComponent},
   { path: 'drivers', component: DriversComponent},
@@ -20,7 +20,7 @@ const appRoutes: Routes = [
   { path: 'pickups', component: PickupsComponent},
   { path: 'pickups/new', component: PickupNewComponent},
   { path: 'pickups/:id', component: PickupComponent},
-  { path: '**', redirectTo: '/login'}
+  { path: '**', redirectTo: '/live-map'}
 ]
 
 @NgModule({

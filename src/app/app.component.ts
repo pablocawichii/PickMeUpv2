@@ -21,18 +21,22 @@ export class AppComponent {
   		if(this.subscription != null){
   			this.subscription.unsubscribe()
   		};
-
-
-  		this.subscription = driversService.getDriver((!!user ? user.uid : '0')).subscribe((driver: Driver) => {
-  			let test = (Object.keys(driver).length === 0 && driver.constructor === Object)
-	  		if(test) {
-          this.priv = "Anon"
-		  		authenticationService.setPriv("Anon");
-	  		} else {
-            this.priv = driver.priv
-  	  			authenticationService.setPriv(driver.priv);
-	  		}
-  		})
+      console.log(!!user)
+      if(!!user){
+    		this.subscription = driversService.getDriver((!!user ? user.uid : '0')).subscribe((driver: Driver) => {
+    			let test = (Object.keys(driver).length === 0 && driver.constructor === Object)
+  	  		if(test) {
+            this.priv = "Anon"
+  		  		authenticationService.setPriv("Anon");
+  	  		} else {
+              this.priv = driver.priv
+    	  			authenticationService.setPriv(driver.priv);
+  	  		}
+    		})
+      } else {
+        this.priv = "-"
+        authenticationService.setPriv("-");
+      }
 		
   	})
   	setInterval(() => {

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Subscription, Observable } from 'rxjs'
+import { Router } from '@angular/router'
 
 import { Pickup } from './pickup.model';
 import { PickupsService } from './pickups.service';
@@ -21,7 +22,7 @@ export class PickupsComponent implements OnInit {
   driverPickups: Pickup[];
   showDriverPickups = false;
 
-  constructor(private pickupsService: PickupsService, public auth: AuthenticationService, public driversService: DriversService) { }
+  constructor(private pickupsService: PickupsService, public auth: AuthenticationService, public driversService: DriversService, private router: Router) { }
 
   ngOnInit() {
     this.priv = this.auth.priv;
@@ -38,8 +39,11 @@ export class PickupsComponent implements OnInit {
     	this.pickupsService.getUnclaimedPickups().subscribe(pickups => {
     		this.pickups = pickups;
     	});
-    }
+    } else if(this.priv == "-") {
+        this.router.navigate(['./live-map'])
 
+    }
+    
   	this.currentDate = new Date();
   	setInterval(() => {
   		this.currentDate = new Date();

@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { GoogleMap, MapMarker } from '@angular/google-maps'
 import { Observable } from 'rxjs'
+import { Router } from '@angular/router'
 
 import { DriversService } from '../drivers/drivers.service'
+import { AuthenticationService } from '../shared/authentication.service';
 
 @Component({
   selector: 'app-live-map',
@@ -22,7 +24,7 @@ export class LiveMapComponent implements OnInit {
   userPosition : {lat: number, lng: number};
 
   
-  constructor(private driversService: DriversService) { }
+  constructor(private driversService: DriversService, private authenticationService: AuthenticationService, private router: Router) { }
 
 
   addMarker(event: google.maps.MapMouseEvent) {

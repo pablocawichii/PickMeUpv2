@@ -3,6 +3,7 @@ import { Subscription, Observable } from 'rxjs'
 import { NgForm } from '@angular/forms'
 import { Router } from '@angular/router'
 
+import { AuthenticationService } from '../shared/authentication.service';
 import { DriversService } from './drivers.service'
 import { Driver } from './driver.model'
 
@@ -16,12 +17,15 @@ export class DriversComponent implements OnInit {
   @ViewChild('f', {static: false}) ndForm: NgForm;
   drivers: Driver[]
   
-  constructor(private driversService: DriversService) { }
+  constructor(private driversService: DriversService, private authenticationService: AuthenticationService, private router: Router) { }
 
   ngOnInit() {
   	this.driversService.drivers.subscribe(drivers => {
   		this.drivers = drivers
   	})
+    if(this.authenticationService.priv == "-"){
+        this.router.navigate(['./live-map'])
+    }
   }
 
   addNewDriver(form: NgForm){
