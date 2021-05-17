@@ -17,9 +17,11 @@
 		<li routerLinkActive="active"><a routerLink="/live-map" >Map</a></li>
 		<li routerLinkActive="active" *ngIf="priv == 'Admin'"><a routerLink="/drivers" >Drivers</a></li>
 		<li routerLinkActive="active" *ngIf="priv != '-'"><a routerLink="/pickups" >Pickups</a></li>
+    <li *ngIf="priv != '-'"><a  (click)="changeStat()">Change Status</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-      	<li><a>{{ priv }}</a></li>
+      	<li *ngIf="priv != '-'"><a>Current Status: {{ status }}</a></li>
+        <li><a>{{ priv }}</a></li>
       	<li>
       		<a style="cursor: pointer;" *ngIf="isAuthenticated" (click)="onLogout()">Logout</a>
       	</li>

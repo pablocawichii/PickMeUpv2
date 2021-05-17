@@ -15,6 +15,7 @@ export class AuthenticationService {
   data: firebase.User
   privChanged = new Subject<string>();
   priv = "Anon";
+  status = "none";
 
   constructor(private angularFireAuth: AngularFireAuth, private router: Router) {
     this.userData = angularFireAuth.user;

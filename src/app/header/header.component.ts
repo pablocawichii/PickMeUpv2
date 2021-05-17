@@ -4,6 +4,7 @@ import { Router } from '@angular/router'
 import { Location } from '@angular/common'
 
 import { AuthenticationService } from '../shared/authentication.service';
+import { DriversService } from '../drivers/drivers.service';
 import { FlashService } from '../shared/flash.service'
 
 @Component({
@@ -16,9 +17,10 @@ export class HeaderComponent implements OnInit, OnDestroy {
 	isAuthenticated ;
 	user;
 	priv = "Anon";
+	status = "Active"
 	message: string = '';
 
-	constructor(private router: Router,public authenticationService: AuthenticationService, private location: Location, private flash: FlashService ) {}
+	constructor(private router: Router,public authenticationService: AuthenticationService, private location: Location, private driversService: DriversService, private flash: FlashService ) {}
 
 	ngOnInit() {
 		this.authenticationService.userData.subscribe(user => {
@@ -28,6 +30,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
 		this.authenticationService.privChanged.subscribe(priv => {
 			console.log(this.priv)
 			this.priv = priv;
+			this.status = this.authenticationService.status
 		})
 		this.flash.messageChanged.subscribe((msg: string) => {
 			this.message = msg;
@@ -49,5 +52,13 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
 	endFlash() {
 		this.flash.endMessage();
+	}
+
+	changeStat() {
+		if(this.authenticationService.status == "Active") {
+			this.driversService.changeStatus(this.authenticationService.data.uid, "Inactive")
+		} else {
+			this.driversService.changeStatus(this.authenticationService.data.uid, "Active")
+		}
 	}
 }

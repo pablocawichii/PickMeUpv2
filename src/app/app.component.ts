@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs'
 
 import { AuthenticationService } from './shared/authentication.service'
@@ -10,10 +10,11 @@ import { DriversService } from './drivers/drivers.service'
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = 'PickMeUp';
   subscription: Subscription;
   priv;
+  lastKnownLocation;
 
   constructor(private authenticationService: AuthenticationService, private driversService: DriversService){
   	authenticationService.userData.subscribe( (user) => {
@@ -30,6 +31,8 @@ export class AppComponent {
   		  		authenticationService.setPriv("Anon");
   	  		} else {
               this.priv = driver.priv
+              authenticationService.status = driver.status
+              this.lastKnownLocation = driver.lkl 
     	  			authenticationService.setPriv(driver.priv);
   	  		}
     		})
@@ -39,9 +42,14 @@ export class AppComponent {
       }
 		
   	})
+
+  }
+
+  ngOnInit() {
   	setInterval(() => {
-  		if(authenticationService.priv == "Driver"){
-  			// driversService.updateDriverLocation(authenticationService.data.uid, this.getUserLocation())
+  		if(this.authenticationService.status == "Active"){
+        this.getUserLocation()
+  			this.driversService.updateDriverLocation(this.authenticationService.data.uid, this.lastKnownLocation)
   		}
   	}, 5000)
   }
@@ -50,11 +58,12 @@ export class AppComponent {
     // get Users current position
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(position => {
-        return {lat: position.coords.latitude, lng: position.coords.longitude};
+        this.lastKnownLocation = {lat: position.coords.latitude, lng: position.coords.longitude};
       })
-    }else{
+    } else {
       console.log("User not allowed")
       return {lat: 0, lng: 0};
     }
+
   }
 }
