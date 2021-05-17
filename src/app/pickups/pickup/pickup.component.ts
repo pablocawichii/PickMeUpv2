@@ -70,6 +70,7 @@ export class PickupComponent implements OnInit {
 	    	console.log(p)        
 	    	if(this.pickup.status == 'delivered') {
 	    		if(this.priv == "Driver") {
+            this.flashService.setMessage("Pickup Complete");
     				this.router.navigate(['/'])
 	    		}
 	    		this.removeMap()
@@ -106,7 +107,7 @@ export class PickupComponent implements OnInit {
             	.subscribe((driver: Driver) => {
                 this.driver = driver;
                 this.driverLoaded = true;
-                
+
             		this.markerPositions[1] = driver.lkl;
             		this.getDirections();
             	})
@@ -145,11 +146,13 @@ export class PickupComponent implements OnInit {
   }
   delivered() {
     this.pickupsService.delivered(this.id)
+    this.flashService.setMessage("Pickup Complete");
     this.router.navigate(['/'])
   }
   cancel() {
   this.pickupsService.cancel(this.id)
-    this.router.navigate(['/'])  
+  this.flashService.setMessage("Pickup Cancelled");
+  this.router.navigate(['/'])  
   }
 
   removeMap() {
@@ -165,6 +168,7 @@ export class PickupComponent implements OnInit {
   	this.pickup.rating = this.rating;
   	this.pickupsService.ratePickup(this.id, this.pickup)
   	this.showRatingForm = false;
+    this.flashService.setMessage("Rating submitted!")
   }
 
 
