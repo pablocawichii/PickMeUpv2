@@ -154,9 +154,9 @@ hr{
 
 
 /* ------------------MICS------------------ */
-.googleMaps{
-    width: 100%;
-    height: 65%;
+.loginReq{
+    text-decoration-line: underline;
+    font-size: 1.2em;
 }
 
 #pickUpMap{
