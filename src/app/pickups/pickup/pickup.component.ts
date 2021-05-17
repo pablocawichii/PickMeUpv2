@@ -166,9 +166,9 @@ export class PickupComponent implements OnInit {
   submitRating() {
   	this.pickup.stars = this.stars;
   	this.pickup.rating = this.rating;
+    this.flashService.setMessage("Rating submitted!")
   	this.pickupsService.ratePickup(this.id, this.pickup)
   	this.showRatingForm = false;
-    this.flashService.setMessage("Rating submitted!")
   }
 
 

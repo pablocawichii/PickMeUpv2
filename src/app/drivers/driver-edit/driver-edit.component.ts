@@ -6,6 +6,9 @@ import { ActivatedRoute, Params, Router } from '@angular/router'
 
 import { FormGroup, FormControl, FormArray, Validators } from '@angular/forms';
 
+import { Pickup } from '../../pickups/pickup.model'
+import { PickupsService } from '../../pickups/pickups.service'
+
 @Component({
   selector: 'driver-edit',
   templateUrl: './driver-edit.component.html',
@@ -19,7 +22,8 @@ export class DriverEditComponent implements OnInit {
 
   constructor(private driversService: DriversService,
   			  private route: ActivatedRoute,
-              private router: Router) { }
+              private router: Router,
+              private pickupsService: PickupsService) { }
 
   ngOnInit(){
     this.route.params.subscribe(
@@ -86,7 +90,6 @@ export class DriverEditComponent implements OnInit {
 
     this.driversService.updateDriver(this.id, newDriver);
 
-    this.onCancel();
   }
   
   getDriversCtrl(){
@@ -121,5 +124,17 @@ export class DriverEditComponent implements OnInit {
     this.router.navigate(["./drivers"]);
   }
 
+  doRating() {
+    this.pickupsService.getPickupsForDriver(this.id).subscribe(pickups => {
+      let sum: number = 0;
+      for (var i = pickups.length - 1; i >= 0; i--) {
+        sum += Number(pickups[i].stars)
+      }
+
+      this.driver.rating = (pickups.length != 0) ? (sum / pickups.length): 5;
+
+      this.onSubmit()
+    })
+  }
 
 }

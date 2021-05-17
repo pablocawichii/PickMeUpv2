@@ -81,6 +81,22 @@ export class PickupsService {
 		)
 	}
 
+	getPickupsForDriver(id: string) //: Observable<any[]>
+	{
+		return this.db.list('pickups', ref => ref.orderByChild("driver").equalTo(id)).snapshotChanges().pipe(
+			map(pickups=>
+				pickups.map(p => {
+					let k = { ...p.payload.val() as Pickup}
+					let x : Pickup = { id: p.payload.key, ...k }
+					x.dateTimeSeconds = (new Date(x.dateTime).valueOf())
+					return (
+						x
+					)}
+				)
+			)
+		)
+	}
+
 	getPickup(id: string){
 		return this.db.list('pickups/'+id).snapshotChanges().pipe(
 			map(pickup => {
@@ -109,6 +125,7 @@ export class PickupsService {
 
     ratePickup(id: string, pickup: Pickup) {
     	this.db.object('pickups/'+id).update(pickup)
+		this.router.navigate (['./live-map'])
 	}
 
 	pickupDriver(id: string, uid: string) {
@@ -130,7 +147,4 @@ export class PickupsService {
 		this.db.object('pickups/'+id).update({status: 'canceled'})
 	}
 
-	cancelPickup(id: string) {
-
-	}
 }
