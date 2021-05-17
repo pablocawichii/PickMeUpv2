@@ -129,8 +129,13 @@ export class DriverEditComponent implements OnInit {
     this.pickupsService.getPickupsForDriver(this.id).subscribe(pickups => {
       let sum: number = 0;
       for (var i = pickups.length - 1; i >= 0; i--) {
-        sum += Number(pickups[i].stars)
+        if(typeof(pickups[i].stars) != "undefined" ){
+          sum += Number(pickups[i].stars)
+          console.log(pickups[i].stars)
+        }
       }
+
+      console.log(sum)
 
       this.driver.rating = (pickups.length != 0) ? (sum / pickups.length): 5;
 
