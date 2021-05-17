@@ -82,6 +82,7 @@ export class DriverEditComponent implements OnInit {
     newDriver.cars = cars;
     newDriver.currentCar = currentCar;
     newDriver.lkl = this.driver.lkl;
+    newDriver.rating = this.driver.rating;
 
     this.driversService.updateDriver(this.id, newDriver);
 
@@ -113,6 +114,11 @@ export class DriverEditComponent implements OnInit {
 
   onCancel() {
     this.router.navigate(["./../.."], {relativeTo: this.route})
+  }
+
+  removeDriver() {
+    this.driversService.removeDriver(this.id);
+    this.router.navigate(["./drivers"]);
   }
 
 

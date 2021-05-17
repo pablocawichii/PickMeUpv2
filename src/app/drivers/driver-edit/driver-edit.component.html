@@ -1,31 +1,5 @@
 <h1>Edit {{ driver ? driver.name : '' }}</h1>
-<div class="row" *ngIf="driver">
-	<div class="col-xs-12">
-		<form [formGroup]="driverForm" (ngSubmit)="onSubmit()" >
 
-			<div class="row">
-				<div class="col-xs-12">
-					<button [disabled]="!driverForm.valid" type="submit" class="btn btn-success">Save</button>				
-					<button type="button" class="btn btn-danger" (click)="onCancel()">Cancel</button>
-				</div>
-			</div>
-
-			<div class="row">
-				<div class="col-xs-12">
-					<div class="form-group">
-						<label for="name">Name</label>
-						<input type="text" name="name" class="form-control" formControlName="name">
-					</div>
-				</div>
-			</div>
-
-			<div class="row">
-				<div class="col-xs-12">
-					<div class="form-group">
-						<label for="email">Email</label>
-						<input type="text" name="email" class="form-control" formControlName="email">
-					</div>
-				</div>
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
 <div id="AdminDriverDetails">
@@ -45,6 +19,9 @@
 					<br>
 					<label class="" for="status">Status</label>
 					<input type="text" name="status" class="textArea centerItem" formControlName="status">
+					
+					<label class="" for="rating">Rating</label>
+					<h3 type="text" name="rating" class="textArea centerItem">{{ driver.rating }}</h3>
 	
 					<div class="centerItem">
 						<button [disabled]="!driverForm.valid" type="submit" class="bttn lowerBtn btn-success">Save</button>				

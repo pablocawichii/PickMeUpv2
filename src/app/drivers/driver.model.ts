@@ -9,6 +9,7 @@ export class Driver {
 	public currentCar: number;
 	public currentPickup?: string;
 	public priv?: string;
+	public rating: number;
 
 	constructor(email: string, name: string, status: string, id: string, priv: string) {
 		this.id = id;
@@ -19,5 +20,6 @@ export class Driver {
 		this.cars = []
 		this.currentCar = -1;
 		this.priv = priv;
+		this.rating = 3;
 	}
 }

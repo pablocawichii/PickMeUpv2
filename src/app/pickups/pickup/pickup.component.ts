@@ -25,6 +25,8 @@ export class PickupComponent implements OnInit {
   showRatingForm = false;
   rating = "";
   stars = 0;
+  driver: Driver;
+  driverLoaded = false;
 
 	pickup: Pickup = new Pickup({lat: 0, lng: 0}, new Date());
 	id: string;
@@ -83,6 +85,8 @@ export class PickupComponent implements OnInit {
               }
               this.driverSubscription = this.driversService.getDriver(this.pickup.driver || this.authenticationService.data.uid)
               	.subscribe((driver: Driver) => {
+                  this.driver = driver;
+                  this.driverLoaded = true;
 
             			this.markerPositions[0] = this.pickup.dropOffLocation;
               		this.markerPositions[1] = driver.lkl;
@@ -100,7 +104,9 @@ export class PickupComponent implements OnInit {
             }
             this.driverSubscription = this.driversService.getDriver(this.pickup.driver || this.authenticationService.data.uid)
             	.subscribe((driver: Driver) => {
-            		console.log(driver)
+                this.driver = driver;
+                this.driverLoaded = true;
+                
             		this.markerPositions[1] = driver.lkl;
             		this.getDirections();
             	})

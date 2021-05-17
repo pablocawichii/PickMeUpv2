@@ -4,9 +4,6 @@
 /* You can add global styles to this file, and also import other style files */
 body{
     background-image: linear-gradient(45deg, #ffccc6e1, white, #c4f8ffd5);
-    width: 100vw;
-    height: 100vh;
-    overflow: hidden;
     margin: 0;
     padding: 0;
     font-family: 'Roboto', sans-serif;
@@ -16,13 +13,6 @@ body{
     display: none;
 }*/
 
-#admin_home{
-    display: none;
-}
-
-#admin_add{
-    display: none;
-}
 
 #AdminDriverDetails{
     overflow: sc;

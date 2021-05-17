@@ -1,15 +1,15 @@
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
-<div class="newTab" id="admin_home">
+<div class="newTab" id="admin_home" *ngIf="show=='def'">
 	<!--AREA TO BE DISPLAYED AS HOME PAGE-->
 	<h1 class="appTitle">PICK ME UP</h1><br><br>
-	<button class="bttn centerItem homeBtn"> Add Driver </button><br>
-	<button class="bttn centerItem homeBtn"> View Driver </button><br>
+	<button class="bttn centerItem homeBtn" (click)="showView('add')"> Add Driver </button><br>
+	<button class="bttn centerItem homeBtn" (click)="showView('view')"> View Driver </button><br>
 	<button class="bttn centerItem homeBtn" routerLink="/live-map"> View Map </button><br>
 	<button class="bttn logoutBtn" >Log Out</button>
 </div>
 
-<div class="newTab" id="admin_add">
+<div class="newTab" id="admin_add" *ngIf="show=='add'">
 	<!--AREA TO ADD A DRIVER-->
 	<p class="centerItem subTitle">Add a New Driver</p>
 	<br><br>
@@ -22,7 +22,7 @@
 				<input type="text" class="centerItem textArea" name="name" id="name" placeholder="Driver's Name" ngModel required>
 			</div>	<br>
 			<div class="centerItem">
-				<input type="text" class="centerItem textArea" name="email" id="email" placeholder="Driver's Email" ngModel required>
+				<input type="email" class="centerItem textArea" name="email" id="email" placeholder="Driver's Email" ngModel required>
 			</div><br>
 			<div class="centerItem">
 				<input type="text" class="centerItem textArea" name="status" id="status" placeholder="Status: Active/Inactive" ngModel required>
@@ -30,19 +30,19 @@
 		</div>
 		<div class="row">
 			<div class="lowerButtonsArea centerItem">
-				<button class="bttn lowerBtn btn-success" type="submit" [disabled]="!f.valid">Add</button>
+				<button class="bttn lowerBtn btn-success" [ngStyle]="{'background-color': f.valid ? '#28a745' : 'gray' }" type="submit" [disabled]="!f.valid">Add</button>
 				<button class="bttn lowerBtn btn-primary" type="button" (click)="clear()">Clear</button>
-				<button class="bttn lowerBtn" type="button">Cancel</button>
+				<button class="bttn lowerBtn" type="button" (click)="showView('def')">Cancel</button>
 			</div>
 		</div>
 	</form>
 </div>
 
-<div class="newTab" id="admin_view">
+<div class="newTab" id="admin_view" *ngIf="show=='view'">
 	<!--AREA TO ADD A DRIVER-->
 	<p class="centerItem subTitle">Edit Driver Details</p>
 	<br><br>
-	<button (click)="getThings()">asdfasd</button>
+	<button class="bttn lowerBtn" type="button" (click)="showView('def')">Go Back</button>
 	<div class="tableArea centerItem">
 		<table class="tableContent">
 			<tr class="tableHeader">

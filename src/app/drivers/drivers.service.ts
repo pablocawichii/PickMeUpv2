@@ -58,6 +58,10 @@ export class DriversService {
 		this.db.object('drivers/'+id).update(changes)
 	}
 
+	removeDriver(id: string) {
+		this.db.object('drivers/'+id).remove()
+	}
+
 	updateDriverLocation(id: string, changes: any) {
 		this.db.object('drivers/'+id+'/lkl').update(changes)
 	}

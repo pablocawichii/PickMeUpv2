@@ -13,6 +13,18 @@
 	<div *ngIf="pickup">
 		<h3 style="text-transform:capitalize;">Status: {{ pickup.status }}</h3>
 		<button class="btn btn-danger" *ngIf="pickup.status == 'unclaimed'" (click)='cancel()'>Cancel</button>
+		<div *ngIf="driverLoaded">
+			<br>
+			<h3>Driver Information</h3>
+			<h3>Name: {{ driver.name }}</h3>
+			<h3>Rating: {{ driver.rating }}</h3>
+			<br>
+			<h3>Car Information</h3>
+			<h3>Model: {{ driver.cars[driver.currentCar].model }}</h3>
+			<h3>Year: {{ driver.cars[driver.currentCar].year }}</h3>
+			<h3>Color: {{ driver.cars[driver.currentCar].color }}</h3>
+			<h3>Brand: {{ driver.cars[driver.currentCar].brand }}</h3>
+		</div>
 	</div>
 </div>
 

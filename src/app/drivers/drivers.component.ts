@@ -16,6 +16,7 @@ import { Driver } from './driver.model'
 export class DriversComponent implements OnInit {
   @ViewChild('f', {static: false}) ndForm: NgForm;
   drivers: Driver[]
+  show: string;
   
   constructor(private driversService: DriversService, private authenticationService: AuthenticationService, private router: Router) { }
 
@@ -26,6 +27,7 @@ export class DriversComponent implements OnInit {
     if(this.authenticationService.priv == "-"){
         this.router.navigate(['./live-map'])
     }
+    this.show = 'def';
   }
 
   addNewDriver(form: NgForm){
@@ -35,16 +37,15 @@ export class DriversComponent implements OnInit {
       this.driversService.createDriver(value.uid, newDriver)
 
       this.clear()
+      this.showView('def')
   }
 
   clear() {
     this.ndForm.reset();
   }
 
-  getThings() {
-  	this.driversService.getDriver('0').subscribe(driver => {
-  		console.log(driver)
-  	})
+  showView(str: string) {
+    this.show = str;
+    console.log(this.show)
   }
-
 }
