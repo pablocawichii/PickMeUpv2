@@ -16,15 +16,15 @@
 		<button class="btn btn-danger" *ngIf="pickup.status == 'unclaimed'" (click)='cancel()'>Cancel</button>
 		<div *ngIf="driverLoaded">
 			<br>
-			<h3>Driver Information</h3>
-			<h3>Name: {{ driver.name }}</h3>
-			<h3>Rating: {{ driver.rating }}</h3>
+			<h3 class="subTitle">Driver Information</h3>
+			<h4>Name: {{ driver.name }}</h4>
+			<h4>Rating: {{ driver.rating }}</h4>
 			<br>
-			<h3>Car Information</h3>
-			<h3>Model: {{ driver.cars[driver.currentCar].model }}</h3>
-			<h3>Year: {{ driver.cars[driver.currentCar].year }}</h3>
-			<h3>Color: {{ driver.cars[driver.currentCar].color }}</h3>
-			<h3>Brand: {{ driver.cars[driver.currentCar].brand }}</h3>
+			<h3 class="subTitle">Car Information</h3>
+			<h4>Model: {{ driver.cars[driver.currentCar].model }}</h4>
+			<h4>Year: {{ driver.cars[driver.currentCar].year }}</h4>
+			<h4>Color: {{ driver.cars[driver.currentCar].color }}</h4>
+			<h4>Brand: {{ driver.cars[driver.currentCar].brand }}</h4>
 		</div>
 	</div>
 </div>
@@ -45,8 +45,9 @@
 </div>
 
 <div *ngIf="showRatingForm">
-	<h1>Rate me!</h1>
-	<input type="number" min="0" max="5" name="" [(ngModel)]="stars">
-	<input type="text" [(ngModel)]="rating">
-	<button (click)="submitRating()">Submit</button>
+	<h3 class="subTitle">Rate me!</h3>
+	<input type="number" class="textArea" min="0" max="5" name="" [(ngModel)]="stars">
+	<input type="text" class="textArea" placeholder="description" [(ngModel)]="rating">
+	<br>
+	<button class="bttn btn-success" (click)="submitRating()">Submit</button>
 </div>
