@@ -1,36 +1,38 @@
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
 
-<div style=" width: 300px; margin: 0 auto;" class="newTab" >
+<div class="newTab" >
 	<h1 class="appTitle">Pick Me Up</h1>
 	<br>
 	<br>
-	<div *ngIf="!showList">
-		<button class="bttn centerItem homeBtn" routerLink="/pickups/new"> Request Pickup </button>
-		<button class="bttn centerItem homeBtn" routerLink="/live-map"> View Map </button>
+	<div *ngIf="!showList" class="subSection centerElement">
+		<button class="bttn centerItem homeBtn" routerLink="/pickups/new"> Request Pickup </button><br>
+		<button class="bttn centerItem homeBtn" routerLink="/live-map"> View Map </button><br>
 		<button class="bttn centerItem homeBtn" *ngIf="showRequestButton" (click)="switchView()"> View Requests </button>
+		<br><br>
 		<button class="bttn logoutBtn" >Log Out</button>
 	</div>
-
-	<table *ngIf="showList" width="100%">
-		<tr><hr></tr>
-		<tr>
-			<th width="75%">Time since Request</th>
-			<th width="25%">More Info</th>
-		</tr>
-		<TBODY *ngIf="showDriverPickups">
-			<tr *ngFor="let pickup of driverPickups">
-				<td>{{ convertToString(currentDate.valueOf() - pickup.dateTimeSeconds) }}</td>
-				<td><button style="width: 35px; margin: 0 auto; display: block" class="btn btn-primary" routerLink="/pickups/{{ pickup.id }}"> X </button></td>
-			</tr>	
-		</TBODY>
-		<TBODY *ngIf="!showDriverPickups">
-			<tr *ngFor="let pickup of pickups">
-				<td>{{ convertToString(currentDate.valueOf() - pickup.dateTimeSeconds) }}</td>
-				<td><button style="width: 35px; margin: 0 auto; display: block" class="btn btn-primary" routerLink="/pickups/{{ pickup.id }}"> X </button></td>
+	<div id="showRequests" class="subSection centerElement"  *ngIf="showList">
+		<table class="tableContent">
+			<tr><hr></tr>
+			<tr>
+				<th>Time since Request</th>
+				<th>More Info</th>
 			</tr>
-		</TBODY>
-		
-		<button class="bttn centerItem homeBtn" (click)="switchView()"> View Menu </button>
-	</table>
-
+			<TBODY *ngIf="showDriverPickups">
+				<tr *ngFor="let pickup of driverPickups">
+					<td>{{ convertToString(currentDate.valueOf() - pickup.dateTimeSeconds) }}</td>
+					<td><button style="width: 35px; margin: 0 auto; display: block" class="btn btn-primary" routerLink="/pickups/{{ pickup.id }}"><span class="material-icons">&#xe148;</span></button></td>
+				</tr>	
+			</TBODY>
+			<TBODY *ngIf="!showDriverPickups">
+				<tr *ngFor="let pickup of pickups">
+					<td>{{ convertToString(currentDate.valueOf() - pickup.dateTimeSeconds) }}</td>
+					<td><button class="btn btn-primary" routerLink="/pickups/{{ pickup.id }}"> <span class="material-icons">&#xe148;</span> </button></td>
+				</tr>
+			</TBODY>
+		</table>
+		<br>
+		<button class="bttn centerItem lowerBtn" (click)="switchView()"> Back </button>
+	</div>
 </div>
