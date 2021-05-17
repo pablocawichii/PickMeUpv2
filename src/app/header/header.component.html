@@ -7,7 +7,7 @@
 	  <button type="button" class="navbar-toggle" (click)="collapsed = !collapsed">
 		<span class="icon-bar" *ngFor="let iconBar of [1, 2, 3]"></span>
 	  </button>
-    <a class="navbar-brand" (click)="goBack()"><--</a>
+    <a class="navbar-brand" (click)="goBack()">&#10096;&#10096; Back</a>
 	  <a routerLink="/" class="navbar-brand">Pick Me Up</a>
 	</div>
 	<div class="navbar-collapse" [class.collapse]="collapsed" (window:resize)="collapsed = true">
@@ -17,10 +17,10 @@
 		<li routerLinkActive="active"><a routerLink="/live-map" >Map</a></li>
 		<li routerLinkActive="active" *ngIf="priv == 'Admin'"><a routerLink="/drivers" >Drivers</a></li>
 		<li routerLinkActive="active" *ngIf="priv != '-'"><a routerLink="/pickups" >Pickups</a></li>
-    <li *ngIf="priv == 'Admin' || priv == 'Driver'"><a  (click)="changeStat()">Change Status</a></li>
+    <li *ngIf="priv != '-'"><a  (click)="changeStat()">Change Status</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-      	<li *ngIf="priv == 'Admin' || priv == 'Driver'"><a>Current Status: {{ status }}</a></li>
+      	<li *ngIf="priv != '-'"><a>Current Status: {{ status }}</a></li>
         <li><a>{{ priv }}</a></li>
       	<li>
       		<a style="cursor: pointer;" *ngIf="isAuthenticated" (click)="onLogout()">Logout</a>
