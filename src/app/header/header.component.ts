@@ -28,7 +28,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
 			this.isAuthenticated = !!user;
 		});
 		this.authenticationService.privChanged.subscribe(priv => {
-			console.log(this.priv)
 			this.priv = priv;
 			this.status = this.authenticationService.status
 		})

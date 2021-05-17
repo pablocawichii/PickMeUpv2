@@ -14,7 +14,7 @@ export class AppComponent implements OnInit {
   title = 'PickMeUp';
   subscription: Subscription;
   priv;
-  lastKnownLocation;
+  lastKnownLocation = {lat: 0, lng: 0};
 
   constructor(private authenticationService: AuthenticationService, private driversService: DriversService){
   	authenticationService.userData.subscribe( (user) => {
@@ -22,12 +22,13 @@ export class AppComponent implements OnInit {
   		if(this.subscription != null){
   			this.subscription.unsubscribe()
   		};
-      console.log(!!user)
+
       if(!!user){
     		this.subscription = driversService.getDriver((!!user ? user.uid : '0')).subscribe((driver: Driver) => {
     			let test = (Object.keys(driver).length === 0 && driver.constructor === Object)
   	  		if(test) {
             this.priv = "Anon"
+            authenticationService.status = "none" 
   		  		authenticationService.setPriv("Anon");
   	  		} else {
               this.priv = driver.priv
@@ -38,6 +39,7 @@ export class AppComponent implements OnInit {
     		})
       } else {
         this.priv = "-"
+        authenticationService.status = "none"
         authenticationService.setPriv("-");
       }
 		
