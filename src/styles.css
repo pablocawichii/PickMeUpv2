@@ -267,11 +267,6 @@ hr{
     height: 50px;
 }
 
-.tableContent tr th{
-    font-size: 1.25em;
-    background: rgb(120, 120, 255);
-    color: white;
-}
 
 .tableHeader span{
     color: rgb(139, 139, 255);
