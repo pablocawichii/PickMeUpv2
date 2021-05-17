@@ -1,4 +1,7 @@
 .highlight {
-	background: red;
-	color: read;
+	margin-left: 4%;
+	width: 92%;
+	background: rgba(214, 255, 248, 0.342);
+	border: 1px solid black;
+	border-radius: 10px;
 }
