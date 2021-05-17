@@ -14,10 +14,6 @@ body{
 }*/
 
 
-#AdminDriverDetails{
-    overflow: sc;
-}
-
 /*default font sizes*/
 p{
     font-size: 1.65rem;
@@ -163,12 +159,23 @@ hr{
     height: 65%;
 }
 
+#pickUpMap{
+    height: 300px;
+    border: 1px solid black;
+}
+
 /*centers any element horizontally*/
 .centerItem{
     position: relative;
     left: 50%;
     transform: translateX(-50%);
     text-align: center;
+}
+
+.centerElement{
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
 }
 
 /*places the elements at the bottom of the div*/
@@ -253,6 +260,19 @@ hr{
     font-size: 1.25em;
 }
 
+/*style for pickup request list*/
+.tableContent TBODY tr td{
+    font-size: 1.25em;
+    padding-left: 20px;
+    height: 50px;
+}
+
+.tableContent tr th{
+    font-size: 1.25em;
+    background: rgb(120, 120, 255);
+    color: white;
+}
+
 .tableHeader span{
     color: rgb(139, 139, 255);
 }
@@ -308,6 +328,11 @@ hr{
 }
 
 /* ------------------PAGE TABS------------------ */
+.subSection{
+    width: 95%;
+    height: 70%;
+}
+
 /*Pick Me Up title*/
 .appTitle{
     margin: 30px 0 20px 0;
@@ -338,8 +363,9 @@ hr{
 
 /*new page styles*/
 .newTab{
-    width: 100vw;
-    height: 100vh;
+    width: 97vw;
+    height: 92vh;
+    overflow-y: hidden;
 }
 
 /* - - - - - - A N I M A T I O N S - - - - - - */
