@@ -90,6 +90,7 @@ export class DriverEditComponent implements OnInit {
 
     this.driversService.updateDriver(this.id, newDriver);
 
+    this.router.navigate(["./drivers"]);
   }
   
   getDriversCtrl(){
