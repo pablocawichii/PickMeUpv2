@@ -1,3 +1,7 @@
+// written by: Pablo Cawich II
+// tested by: Pablo Cawich II
+// debugged by: Pablo Cawich II
+
 import { Component, OnInit } from '@angular/core';
 import { AuthenticationService } from '../shared/authentication.service';
 import { Router } from '@angular/router'
@@ -8,6 +12,7 @@ import { Router } from '@angular/router'
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
+  // Variables
   email: string;
   password: string;
   cust = true;
@@ -15,9 +20,7 @@ export class LoginComponent implements OnInit {
   constructor(public authenticationService: AuthenticationService, private router: Router) {}
 
   ngOnInit(){
-  // 	if(this.authenticationService.currentPriv != 'anon'){
-		// this.router.navigate(['/'])
-  // 	}
+    // If user already logged in redirect
   	this.authenticationService.userData.subscribe((user) => {
   		if(!!user) {
   			this.router.navigate(['/live-map'])
@@ -25,32 +28,31 @@ export class LoginComponent implements OnInit {
   	})
   }
 
+  // Creates new user
   signUp() {
     this.authenticationService.SignUp(this.email, this.password);
     this.email = ''; 
     this.password = '';
   }
 
+  // Logs user in
   signIn() {
-    // this.authenticationService.setPriv('driver')
     this.authenticationService.SignIn(this.email, this.password);
     this.email = ''; 
     this.password = '';
   }
 
+  // Logs user out
   signOut() {
-    // this.authenticationService.setPriv('anon')
     this.authenticationService.SignOut();
   }
 
-  setPriv(priv: string) {
-  	// this.authenticationService.setPriv(priv);
-  }
-
+  // Log in using googles authentication
   loginGoogle() {  	
     this.authenticationService.SignInGoogle();
   }
 
+  // Switch View
   switcha() {
     this.cust = !this.cust;
   }

@@ -1,3 +1,7 @@
+// written by: Pablo Cawich II
+// tested by: Pablo Cawich II
+// debugged by: Pablo Cawich II
+
 import { Component, OnInit } from '@angular/core';
 import { Subscription, Observable } from 'rxjs'
 import { Router } from '@angular/router'
@@ -14,6 +18,7 @@ import { DriversService } from '../drivers/drivers.service'
   styleUrls: ['./pickups.component.css']
 })
 export class PickupsComponent implements OnInit {
+  // Variables
 	pickups: Pickup[];
 	listOfPickups;
 	currentDate: Date;
@@ -26,9 +31,13 @@ export class PickupsComponent implements OnInit {
   constructor(private pickupsService: PickupsService, public auth: AuthenticationService, public driversService: DriversService, private router: Router) { }
 
   ngOnInit() {
+    // Retreives user privelige
     this.priv = this.auth.priv;
+
+    // Drivers can view requests 
     if(this.priv == "Driver" || this.priv == "Admin") {
       this.showRequestButton = true;  
+      // Check for Claimed pickups from specific driver 
       this.pickupsService.getDriverPickup(this.auth.data.uid).subscribe(pickups => {
         this.driverPickups = pickups;
         if(this.driverPickups.length != 0) {
@@ -37,20 +46,23 @@ export class PickupsComponent implements OnInit {
           this.showDriverPickups = false;
         }
       });
+      // Retreive all unclaimed pickups
     	this.pickupsService.getUnclaimedPickups().subscribe(pickups => {
     		this.pickups = pickups;
     	});
+    // Redirects users who do not have right permissions
     } else if(this.priv == "-") {
         this.router.navigate(['./live-map'])
-
     }
 
+    // Consistenly update the time
   	this.currentDate = new Date();
   	setInterval(() => {
   		this.currentDate = new Date();
   	}, 5000)
   }
 
+  // Convert ms to readable time
 	convertToString(num) {
 		num = Math.floor(num / 1000) 
 		let seconds = num % 60;
@@ -61,18 +73,7 @@ export class PickupsComponent implements OnInit {
 		return `${hours}:${minutes}:${seconds}`
 	}
 
-
-  newPickup() {
-    if (navigator.geolocation) {
-      	navigator.geolocation.getCurrentPosition(position => {
-	      	let nPickup = new Pickup({lat: position.coords.latitude, lng: position.coords.longitude}, new Date() );
-		  	this.pickupsService.addPickup(nPickup);
-    	})
-    } else {
-		alert("Cannot retrieve location. Please allow location.")
-    }
-  }
-
+  // Switches between multiple views
   switchView() {
       this.showList = !this.showList;  
   }

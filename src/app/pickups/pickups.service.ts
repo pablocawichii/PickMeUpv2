@@ -1,3 +1,7 @@
+// written by: Pablo Cawich II
+// tested by: Pablo Cawich II
+// debugged by: Pablo Cawich II
+
 import { Injectable } from '@angular/core';
 import { AngularFireDatabase } from '@angular/fire/database';
 import { Subject, Observable } from 'rxjs'
@@ -31,6 +35,7 @@ export class PickupsService {
 		);
 	}
 
+	// Retreive all Pickups
 	getAllPickups(){
 		return this.db.list('pickups').snapshotChanges()
 		.pipe(
@@ -47,6 +52,7 @@ export class PickupsService {
 		)
 	}
 
+	// Retreive claimed Driver pickup
 	getDriverPickup(driverId: string)
 	{
 		return this.db.list('pickups', ref => ref.orderByChild("driver").equalTo(driverId)).snapshotChanges().pipe(
@@ -64,6 +70,7 @@ export class PickupsService {
 		)
 	}
 
+	// Retreive unclaimed pickups
 	getUnclaimedPickups() //: Observable<any[]>
 	{
 		return this.db.list('pickups', ref => ref.orderByChild("status").equalTo("unclaimed")).snapshotChanges().pipe(
@@ -81,6 +88,8 @@ export class PickupsService {
 		)
 	}
 
+	// Retreive all the pickups for a specific driver
+	// Used for the dynamic rating
 	getPickupsForDriver(id: string) //: Observable<any[]>
 	{
 		return this.db.list('pickups', ref => ref.orderByChild("driver").equalTo(id)).snapshotChanges().pipe(
@@ -97,6 +106,7 @@ export class PickupsService {
 		)
 	}
 
+	// Get Specific Pickup
 	getPickup(id: string){
 		return this.db.list('pickups/'+id).snapshotChanges().pipe(
 			map(pickup => {
@@ -110,6 +120,7 @@ export class PickupsService {
 	}
 
 
+	// Adds new Pickup
 	addPickup(pickup: Pickup) {
 
 		let pu = {...pickup, dateTime: pickup.dateTime.toJSON()}
@@ -123,26 +134,33 @@ export class PickupsService {
 
 	}
 
+	// Adds rating to a pickup
     ratePickup(id: string, pickup: Pickup) {
     	this.db.object('pickups/'+id).update(pickup)
 		this.router.navigate (['./live-map'])
 	}
 
+	// Claims the pickup and places the driver id
 	pickupDriver(id: string, uid: string) {
     	this.db.object('pickups/'+id).update({driver: uid, status: 'claimed'})
 	}
 
+	// Unclaims the pickup and places the driver as null
 	unclaimPickup(id: string) {
 		this.db.object('pickups/'+id).update({driver: null, status: 'unclaimed'})
 	}
 
+	// Sets pickup status to retreived
 	retrieved(id: string) {
 		this.db.object('pickups/'+id).update({status: 'retrieved'})
 	}
 
+	// Sets pickup status to delivered
 	delivered(id: string) {
 		this.db.object('pickups/'+id).update({status: 'delivered'})
 	}
+
+	// Sets pickup status to cancelled
 	cancel(id: string) {
 		this.db.object('pickups/'+id).update({status: 'canceled'})
 	}

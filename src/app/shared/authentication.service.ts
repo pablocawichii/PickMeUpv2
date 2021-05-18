@@ -1,3 +1,7 @@
+// written by: Pablo Cawich II
+// tested by: Pablo Cawich II
+// debugged by: Pablo Cawich II
+
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from "@angular/fire/auth";
 import { Observable, Subject } from 'rxjs';
@@ -11,6 +15,7 @@ import { DriversService } from '../drivers/drivers.service'
 
 
 export class AuthenticationService {
+  // Public Variables
   userData: Observable<firebase.User>;
   data: firebase.User
   privChanged = new Subject<string>();
@@ -51,6 +56,7 @@ export class AuthenticationService {
       });
   }
 
+  // Sign up with google authentication
 	SignInGoogle() {	
 	    this.angularFireAuth
 	      
@@ -72,6 +78,7 @@ export class AuthenticationService {
 
   }  
 
+  // Sets and send priv message
   setPriv(str: string){
   	this.priv = str;
   	this.privChanged.next(this.priv)

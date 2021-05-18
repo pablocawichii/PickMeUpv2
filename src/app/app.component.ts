@@ -1,3 +1,7 @@
+// written by: Pablo Cawich II
+// tested by: Pablo Cawich II
+// debugged by: Pablo Cawich II
+
 import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs'
 
@@ -11,33 +15,40 @@ import { DriversService } from './drivers/drivers.service'
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
+  // Public Variables
   title = 'PickMeUp';
   subscription: Subscription;
   priv;
   lastKnownLocation = {lat: 0, lng: 0};
 
   constructor(private authenticationService: AuthenticationService, private driversService: DriversService){
-  	authenticationService.userData.subscribe( (user) => {
+  	// Sets User data
+    authenticationService.userData.subscribe( (user) => {
   		authenticationService.data = user;
   		if(this.subscription != null){
   			this.subscription.unsubscribe()
   		};
 
+      // Check for User
       if(!!user){
     		this.subscription = driversService.getDriver((!!user ? user.uid : '0')).subscribe((driver: Driver) => {
     			let test = (Object.keys(driver).length === 0 && driver.constructor === Object)
-  	  		if(test) {
+  	  		// Check if user in driver table
+          if(test) {
+            // Customers
             this.priv = "Anon"
             authenticationService.status = "none" 
   		  		authenticationService.setPriv("Anon");
   	  		} else {
-              this.priv = driver.priv
-              authenticationService.status = driver.status
-              this.lastKnownLocation = driver.lkl 
-    	  			authenticationService.setPriv(driver.priv);
+            // Drivers and Admin
+            this.priv = driver.priv
+            authenticationService.status = driver.status
+            this.lastKnownLocation = driver.lkl 
+  	  			authenticationService.setPriv(driver.priv);
   	  		}
     		})
       } else {
+        // Guests 
         this.priv = "-"
         authenticationService.status = "none"
         authenticationService.setPriv("-");
@@ -48,6 +59,7 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit() {
+    // Sets driver location to current location
   	setInterval(() => {
   		if(this.authenticationService.status == "Active"){
         this.getUserLocation()

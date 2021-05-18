@@ -1,3 +1,7 @@
+// written by: Pablo Cawich II
+// tested by: Pablo Cawich II
+// debugged by: Pablo Cawich II
+
 import { Component, OnInit } from '@angular/core';
 
 import { Driver } from '../driver.model'
@@ -15,6 +19,7 @@ import { PickupsService } from '../../pickups/pickups.service'
   styleUrls: ['./driver-edit.component.css']
 })
 export class DriverEditComponent implements OnInit {
+  // Initialize Variables
 	driver: Driver;
 	id: string
 	formCurrentCar: number;
@@ -26,6 +31,7 @@ export class DriverEditComponent implements OnInit {
               private pickupsService: PickupsService) { }
 
   ngOnInit(){
+    // Get Driver from url
     this.route.params.subscribe(
       (params: Params) => {
         this.id = params['id'];
@@ -37,6 +43,7 @@ export class DriverEditComponent implements OnInit {
       )
   }
 
+  // Initialize the form
   private initForm() {
     let driverName = '';
     let driverEmail = '';
@@ -45,26 +52,26 @@ export class DriverEditComponent implements OnInit {
     let driverCurrentCar = -1;
     
 
-	const driver = this.driver;
+  	const driver = this.driver;
 
-	driverName = driver.name
-	driverEmail = driver.email
-	driverStatus = driver.status;
-	driverCurrentCar = driver.currentCar;
-	this.formCurrentCar = driver.currentCar;
-	if(driver['cars']) {
-	for ( let car of driver.cars) {
-	  driverCars.push(
-	    new FormGroup({
-	      'model': new FormControl(car.model, Validators.required),
-	      'year': new FormControl(car.year, [Validators.required, Validators.pattern(/^[1-9]+[0-9]*$/)]),
-		  'brand': new FormControl(car.brand, Validators.required),
-		  'color': new FormControl(car.color, Validators.required)              
-	    })
-	    )
-	}
-	}	
-    
+  	driverName = driver.name
+  	driverEmail = driver.email
+  	driverStatus = driver.status;
+  	driverCurrentCar = driver.currentCar;
+  	this.formCurrentCar = driver.currentCar;
+  	if(driver['cars']) {
+  	for ( let car of driver.cars) {
+  	  driverCars.push(
+  	    new FormGroup({
+  	      'model': new FormControl(car.model, Validators.required),
+  	      'year': new FormControl(car.year, [Validators.required, Validators.pattern(/^[1-9]+[0-9]*$/)]),
+  		  'brand': new FormControl(car.brand, Validators.required),
+  		  'color': new FormControl(car.color, Validators.required)              
+  	    })
+  	    )
+  	}
+  	}	
+      
 
     this.driverForm = new FormGroup({
       'name': new FormControl(driverName, Validators.required),
@@ -75,6 +82,7 @@ export class DriverEditComponent implements OnInit {
     });
   }
 
+  // Submit the for
   onSubmit() {
     const name = this.driverForm.value['name'];
     const email = this.driverForm.value['email'];
@@ -88,8 +96,10 @@ export class DriverEditComponent implements OnInit {
     newDriver.lkl = this.driver.lkl;
     newDriver.rating = this.driver.rating;
 
+    // Update the driver in db
     this.driversService.updateDriver(this.id, newDriver);
 
+    // Navigate away from page
     this.router.navigate(["./drivers"]);
   }
   
@@ -97,14 +107,17 @@ export class DriverEditComponent implements OnInit {
     return (<FormArray>this.driverForm.get('cars')).controls;
   }
 
+  // Removes a car from list
   onDeleteCar(index: number) {
     (<FormArray>this.driverForm.get('cars')).removeAt(index);
   }
 
+  // Sets the current car to the car clicked
 	makeCurrentCar(index: number) {
 		this.formCurrentCar = index;
 	}
 
+  // Add a car to list
   onAddCar() {
     (<FormArray>this.driverForm.get('cars')).push(
             new FormGroup({
@@ -116,15 +129,18 @@ export class DriverEditComponent implements OnInit {
             )
   }
 
+  // Cancel editing
   onCancel() {
     this.router.navigate(["./../.."], {relativeTo: this.route})
   }
 
+  // Deletes the driver
   removeDriver() {
     this.driversService.removeDriver(this.id);
     this.router.navigate(["./drivers"]);
   }
 
+  // Manually do the driver ratings
   doRating() {
     this.pickupsService.getPickupsForDriver(this.id).subscribe(pickups => {
       let sum: number = 0;

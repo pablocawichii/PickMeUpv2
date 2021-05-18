@@ -1,3 +1,7 @@
+// written by: Pablo Cawich II
+// tested by: Pablo Cawich II
+// debugged by: Pablo Cawich II
+
 import { Component, OnInit } from '@angular/core';
 import { GoogleMap, MapMarker } from '@angular/google-maps'
 import { Observable } from 'rxjs'
@@ -12,7 +16,7 @@ import { AuthenticationService } from '../shared/authentication.service';
   styleUrls: ['./live-map.component.css']
 })
 export class LiveMapComponent implements OnInit {
-
+  // Variables 
   center: google.maps.LatLngLiteral = {
   	lat: 17.25053108195495, 
   	lng: -88.76979103434168
@@ -28,15 +32,15 @@ export class LiveMapComponent implements OnInit {
 
 
   addMarker(event: google.maps.MapMouseEvent) {
-    // this.locationsService.addLocation(event.latLng.toJSON())
-    // this.markerPositions.push(event.latLng.toJSON());
     console.log(event.latLng.toJSON())
   }
 
 
   ngOnInit() {
+    // Place user location on map
     this.getUserLocation();
 
+    // Place active users on map
     this.driversService.getDriverLocations()
     .subscribe((locations) => {
     	this.markerPositions = locations;
