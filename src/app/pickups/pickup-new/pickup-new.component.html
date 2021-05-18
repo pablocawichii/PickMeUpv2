@@ -1,5 +1,7 @@
+ <!-- CLIENT REQUEST PAGE FILE -->
+ 
  <div class="newTab">
- 	
+	 <!-- TOP AREA, GIVING DESCRIPTION OF REQUEST OPTIONS -->
 	<div *ngIf="!show">
 		<p class="centerItem subTitle">Open Map to add destination</p>
 		<p class="centerItem subTitle">Or</p>
@@ -7,6 +9,7 @@
 		<p class="centerItem subTitle">describe destination on taxi arrival</p>
 	</div>
 	<div *ngIf="show">
+		<!-- GOOGLE MAP FRAME - USED FOR THE CLIENT TO  SELECT HIS/HER LOCATION -->
 		<p class="centerItem subTitle">Select your destination</p>
 		<div class="googleMaps">
 			<google-map width="100%" height="400px"
@@ -18,10 +21,9 @@
 			</google-map>
 		</div>
 	</div>
-	
+	<!-- BOTTOM BUTTONS USED CONFIRM REQUEST AND TO OPEN THE MAP RESPECTIVELY-->
 	<div class="lowerButtonsArea centerItem">
 		<button class="bttn lowerBtn" (click)="newPickup()">Confirm</button>
 		<button class="bttn lowerBtn" (click)="showMap()">{{ show ? "Close" : "Open" }} Map</button> <hr>
 	</div>
-
  </div>
