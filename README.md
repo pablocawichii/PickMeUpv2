@@ -26,28 +26,18 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 ## Source Code Directory
 
 + - src
-|
 + - + - app // Contains the main dynamic entry for angular
-|
 + - + - + - drivers // holds the files for the drivers class and service
-|
 + - + - + - pickups // holds the files for the pickups class and service
-|
 + - + - + - live-map // holds the files for the live map
-|
 + - + - + - login // holds the files for the login page
-|
 + - + - + - shared // holds the files for the authentication class and service
-|
 + - + - assets // Contains the primary assets such as pictures.
-|
 + - + - main.ts // The main ts file for angular
-|
 + - + - index.html // The html file that is used as the base for the dynamic angular page.
-|
-|
+
 + - README.md
-|
+
 + - angular.json // Necesarry for file to run
-|
+
 + - package.json // Contains the dependencies which are needed during ng install
