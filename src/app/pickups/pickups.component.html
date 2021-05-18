@@ -1,24 +1,32 @@
+<!-- CLIENT SIDE FILE -->
+
+<!-- GOOGLE FONTS IMPORTATION -->
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
 
 <div class="newTab" >
+	<!-- CLIENT'S MAIN SECTION -->
 	<h1 class="appTitle">Pick Me Up</h1>
 	<br>
 	<br>
 	<div *ngIf="!showList" class="subSection centerElement">
+		<!-- CLIENT'S OPTIONS BUTTONS -->
 		<button class="bttn centerItem homeBtn" routerLink="/pickups/new"> Request Pickup </button><br>
 		<button class="bttn centerItem homeBtn" routerLink="/live-map"> View Map </button><br>
 		<button class="bttn centerItem homeBtn" *ngIf="showRequestButton" (click)="switchView()"> View Requests </button>
 		<br><br>
 		<button class="bttn logoutBtn" >Log Out</button>
 	</div>
+	<!-- SECTION TO VIEW SHOW THE CLIENT'S REQUESTS -->
 	<div id="showRequests" class="subSection centerElement"  *ngIf="showList">
 		<table class="tableContent">
 			<tr><hr></tr>
 			<tr>
+				<!-- TABLE HEADER -->
 				<th>Time since Request</th>
 				<th>More Info</th>
 			</tr>
+			<!-- REQUEST DETAILS DISPLAYED -->
 			<TBODY *ngIf="showDriverPickups">
 				<tr *ngFor="let pickup of driverPickups">
 					<td>{{ convertToString(currentDate.valueOf() - pickup.dateTimeSeconds) }}</td>
@@ -33,6 +41,7 @@
 			</TBODY>
 		</table>
 		<br>
+		<!-- BOTTOM BUTTON TO GO BACK TO HOME PAGE -->
 		<button class="bttn centerItem lowerBtn" (click)="switchView()"> Back </button>
 	</div>
 </div>
