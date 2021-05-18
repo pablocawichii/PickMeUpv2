@@ -1,5 +1,5 @@
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-
+<!-- PAGE THAT DISPLAYS THE ADMIN MAIN PAGE -->
 <div class="newTab" id="admin_home" *ngIf="show=='def'">
 	<!--AREA TO BE DISPLAYED AS HOME PAGE-->
 	<h1 class="appTitle">PICK ME UP</h1><br><br>
@@ -29,6 +29,7 @@
 			</div>
 		</div>
 		<div class="row">
+			<!-- BOTTOM BUTTONS FOR ADDING DRIVER ONLY -->
 			<div class="lowerButtonsArea centerItem">
 				<button class="bttn lowerBtn btn-success" [ngStyle]="{'background-color': f.valid ? '#28a745' : 'gray' }" type="submit" [disabled]="!f.valid">Add</button>
 				<button class="bttn lowerBtn btn-primary" type="button" (click)="clear()">Clear</button>
@@ -44,7 +45,9 @@
 	<br><br>
 	<button class="bttn lowerBtn" type="button" (click)="showView('def')">Go Back</button>
 	<div class="tableArea centerItem">
+		<!-- TABLE THAT DISPLAYS THE DETAILS OF ALL DRIVERS AND ADMINS -->
 		<table class="tableContent">
+			<!-- TABLE HEADER -->
 			<tr class="tableHeader">
 				<th>&#8681; <span>Licence ID</span></th>
 				<th>&#8681; <span>Name</span></th>
@@ -52,7 +55,7 @@
 				<th>&#8681; <span>Status</span></th>
 				<th>&#8681; <span>Edit</span></th>
 			</tr>
-	
+			<!-- DATA RETRIEVED -->
 			<tr *ngFor="let driver of drivers; let i = index">
 				<th>{{ driver.id }}</th>
 				<th>{{ driver.name }}</th>
@@ -62,10 +65,9 @@
 			</tr>
 		</table>
 	</div>
+	<!-- A SECTION USED TO INFORM THE USER TO SCROLL LEFT TO VIEW ALL DRIVER DETAILS -->
 	<div class="smallDevice centerItem">
 		<p><br>Small screen detected, scroll left from more data.<br>
 			<span class="material-icons">&#xea50;</span></p>			
 	</div>
 </div>
-
-
