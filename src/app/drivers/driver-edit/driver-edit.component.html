@@ -1,14 +1,16 @@
-<h1>Edit {{ driver ? driver.name : '' }}</h1>
+<!-- FILE FOR EDITING DRIVER'S & ADMIN'S INFORMATION -->
 
+<h1>Edit {{ driver ? driver.name : '' }}</h1>
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
 <div id="AdminDriverDetails">
 	<div class=""  *ngIf="driver">
 		<div class="">
+			<!-- FORM TO SUBMIT THE CHANGES -->
 			<form [formGroup]="driverForm" (ngSubmit)="onSubmit()" >
 				<br><br>
 				<div class="detailsTable">
-					<!-- Driver's Details - edit area -->
+					<!-- EDIT AREA -->
 					<p class="subTitle"><span class="material-icons"> &#xe150;</span> Account: {{ driver ? driver.name : '' }}</p>
 					<br>
 					<label class="" for="name">Name</label>
@@ -19,10 +21,9 @@
 					<br>
 					<label class="" for="status">Status</label>
 					<input type="text" name="status" class="textArea centerItem" formControlName="status">
-					
 					<label class="" for="rating">Rating</label>
 					<h3 type="text" name="rating" class="textArea centerItem">{{ driver.rating }}</h3>
-	
+					<!-- BUTTOM BUTTONS TO SAVE THE CHANGES DONE TO THE DRIVER'S DETAILS ONLY -->
 					<div class="centerItem">
 						<button [disabled]="!driverForm.valid" type="submit" class="bttn lowerBtn btn-success">Save</button>				
 						<button type="button" class="bttn lowerBtn btn-info" (click)="doRating()">Rating</button>				
@@ -37,7 +38,7 @@
 					<div class="vehicleRow" formArrayName="cars">
 						<!--Display all Vehicles-->
 						<div  [ngClass]="{highlight: formCurrentCar == i, row: true}" *ngFor="let carControl of getDriversCtrl(); let i = index" [formGroupName]="i" style="margin-top: 10px;">
-	
+
 							<label class="" for="carModel">Model</label>
 							<input type="text" class="textArea centerItem" name="carModel" formControlName="model">
 								
@@ -49,7 +50,7 @@
 	
 							<label class="" for="carYear">Year</label>
 							<input type="number" class="textArea centerItem" name="carYear" formControlName="year">
-	
+							<!-- BOTTOM BUTTONS TO DELETE AND MAKE THE CURRENT VEHICLE PRIMARY RESPECTIVELY-->
 							<div class="centerItem">
 								<button type="button" class="bttn lowerBtn btn-danger" (click)="onDeleteCar(i)" >Delete Car</button>
 								<button type="button" class="bttn lowerBtn btn-primary" (click)="makeCurrentCar(i)" >Primary Car</button>
@@ -57,7 +58,7 @@
 							<hr>
 							<br><br><br><br>
 						</div>
-						<!--Add New Vehicle-->
+						<!--Add New Vehicle Button-->
 						<button class="bttn centerItem lowerBtn btn-success" type="button" (click)="onAddCar()" ><span class="material-icons">&#xe148;</span>Add Car</button>
 						<hr>
 					</div>
