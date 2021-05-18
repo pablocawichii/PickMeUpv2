@@ -1,5 +1,8 @@
-<h1 class="centerItem">Pickup Details</h1>
+ <!-- PAGE TO SHOW THE REQUEST LIST AND DETAILS -->
 
+<h1 class="centerItem">Pickup Details</h1>
+<!-- AREA ONLY VISIBLE BY ADMINS AND DRIVERS -->
+<!-- AREA TO CLAIM, UNCLAIM, RETIEVE A DRIVER AND FINISH A TRIP -->
 <div  *ngIf="priv == 'Driver' || priv == 'Admin'">
 	<div *ngIf="pickup" class="centerItem">
 		<h3 class=" btn-danger" *ngIf="pickup.status == 'canceled'">Canceled</h3>
@@ -10,10 +13,14 @@
 	</div>
 	<br>
 </div>
+ <!-- AREA VISIBLE BY CLIENTS -->
 <div  *ngIf="priv == 'Anon'">
 	<div *ngIf="pickup">
+		<!-- REQUEST STATUS DETAIL -->
 		<h3 style="text-transform:capitalize;">Status: {{ pickup.status }}</h3>
+		<!-- BUTTON TO CANCEL THE REQUEST -->
 		<button class="btn btn-danger" *ngIf="pickup.status == 'unclaimed'" (click)='cancel()'>Cancel</button>
+		<!-- AREA DISPLAYED TO CLIENT ABOUT THE DRIVER'S DETAILS THAT CLAIMED THE REQUEST -->
 		<div *ngIf="driverLoaded">
 			<br>
 			<h3 class="subTitle">Driver Information</h3>
@@ -28,9 +35,8 @@
 		</div>
 	</div>
 </div>
-
+ <!-- GOOGLE MAP FRAME - DISPLAY'S THE ROUTE -->
 <div *ngIf="showMap">
-	
 	<google-map width="100%" height="400px"
 	            [center]="center"
 	            [zoom]="zoom"
@@ -43,7 +49,7 @@
 
 	</google-map>
 </div>
-
+<!-- THE RATING FORM DISPLAYED TO CLIENT TO RATE HIS/HER TRIP -->
 <div *ngIf="showRatingForm">
 	<h3 class="subTitle">Rate me!</h3>
 	<input type="number" class="textArea" min="0" max="5" name="" [(ngModel)]="stars">
